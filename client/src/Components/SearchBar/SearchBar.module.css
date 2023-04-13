@@ -1,0 +1,30 @@
+.d_flex {
+  display: flex;
+}
+
+.button_search {
+  background-image: url("../../img/buscar2.png");
+  background-size: contain; /* ajustar el tamaño de la imagen */
+  background-position: center; /* centrar la imagen */
+  background-repeat: no-repeat; /* no repetir la imagen */
+  width: 40px;
+  background-color: #124c5f;
+  border-radius: 10px;
+  border: 0px;
+  margin-right: 5px;
+}
+.button_search:hover {
+  color: rgba(255, 170, 0, 1) !important;
+  box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+  transition: all 0.2s ease;
+}
+
+.searchBar {
+  border-radius: 10px;
+  background-color: #ebf1f4;
+  border: 0ch;
+  font-style: italic;
+}
+.searchBar:focus {
+  border: 2px solid blue;
+}

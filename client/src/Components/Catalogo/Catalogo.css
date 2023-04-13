@@ -1,0 +1,114 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10ch;
+  margin-left: 20%;
+}
+
+.Orderby {
+  text-decoration: none;
+  outline: none;
+  text-align: center;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 0px;
+}
+
+.btnSort {
+  width: 131px;
+  height: 34px;
+  flex-grow: 0;
+  margin: 6px 20px 2px;
+  padding: 8px 29px;
+  border-radius: 20px;
+  background-color: rgba(255, 170, 0, 0.66);
+  align-items: center;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  border: 0px;
+}
+
+.btnSort:hover {
+  color: rgb(252, 252, 252) !important;
+  box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+  transition: all 0.2s ease;
+}
+
+.btnDiv {
+  display: flex;
+  margin: 20px;
+  margin-left: 100px;
+  width: 739px;
+  height: 42px;
+  left: 511px;
+  top: 146px;
+  gap: 20px;
+}
+
+.btnDiv2 {
+  margin-top: 10px;
+  display: flex;
+  width: 135px;
+  height: 42px;
+  left: 511px;
+  top: 146px;
+}
+.btnDiv3 {
+  display: flex;
+  width: 135px;
+  height: 42px;
+  left: 511px;
+  top: 146px;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+  font-size: 10px;
+  gap: -3px;
+  font-family: "Rubik";
+  line-height: 5px;
+  margin-top: 10px;
+}
+
+.pagination .page-num {
+  padding: 8px 16px; /* agregar un padding a los botones */
+  margin: 0 8px; /* agregar un margen entre los botones */
+  color: black; /* cambiar el color del texto de los botones */
+  border: none; /* quitar el borde de los botones */
+  /* redondear los bordes de los botones */
+  cursor: pointer;
+  border-radius: 8px;
+  border: solid 1px #f1f1f1;
+}
+
+.pagination .page-num:hover {
+  background-color: #124c5f;
+  color: white;
+  padding: 8px 15px;
+}
+
+.pagination .active {
+  display: flex;
+
+  background-color: #124c5f;
+  content: normal;
+  padding: 8px 2px; /* agregar un padding a los botones */
+  margin: 0 8px; /* agregar un margen entre los botones */
+  /* cambiar el color del texto de los botones */
+  border: 0px; /* quitar el borde de los botones */
+  border-radius: 5px; /* redondear los bordes de los botones */
+  cursor: pointer;
+}
+
+.DivPagi {
+  margin-left: 600px;
+}

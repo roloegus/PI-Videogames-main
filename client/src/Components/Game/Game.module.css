@@ -1,0 +1,136 @@
+.createDiv{
+    /* margin-top: -190px; */
+    background-color: #fceed5;
+    /* background-image: url('../img/back.png'); */
+    width: 1920px; 
+    height: 877px; 
+    background-size: 100%;
+    position: absolute; 
+  }
+  
+  .containerE{
+    margin-top: -30px;
+    display: flex;
+   
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1069px;
+    height: 603px;    
+    background: rgba(255, 255, 255, 0.44);
+    backdrop-filter: blur(2px);
+  
+  
+  border-radius: 16px;
+  
+  }
+  
+  .divBreedE{
+    width: 978px;
+    height: 538px;
+    flex-grow: 0;
+    background: transparent;
+    border-radius: 16px;
+    
+    display: flex;
+    align-items: center;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+    margin-top: 30px;
+    margin-left: 40px;
+  }
+  
+  .TitleBreedE{
+    margin-left: 68px;
+    margin-top: 20px;
+    font-family: 'Fredoka One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    display: flex;
+    
+    
+    color: #124C5F;
+  }
+  
+  .date{
+    
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 15px;
+  
+  
+  
+  color: #1d1d1d;
+    
+  
+  }
+  
+  .container_img{
+    display: flex;
+    box-sizing: border-box;
+    justify-items: auto;
+    position: absolute;
+    width: 485px;
+    height: 518px;
+    left: 0px;
+    top: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px 0px 0px 16px;
+  }
+  
+  .img{
+    border-radius: 16px 0px 0px 16px;
+  }
+  
+  .container_data{
+    position: absolute;
+  width: 485px;
+  height: 518px;
+  left: 485px;
+  top: 10px;
+  
+  background: #EBF1F4;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 16px 16px 0px;
+  }
+  
+  .temp{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+      background: rgba(255, 255, 255, 0.63); 
+      backdrop-filter: blur(2px) ;
+      border-radius: 16px;
+     
+      margin: 3%;
+      padding: 3%;
+      
+  }
+  .label{
+    
+    padding: 2px;
+    text-align: center;
+      font-family: 'Questrial'; 
+      font-style: normal; 
+      font-weight: 400; 
+      font-size: 22px; 
+      line-height: 20px; 
+      padding: 3%;
+      color: black;  
+  }
+  
+  .temlabel{
+    margin-left: 68px;
+    font-family: 'Fredoka One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  display: flex;
+  align-items: center;
+  
+  color: #124C5F;
+  }

@@ -1,0 +1,50 @@
+.button {
+  top: 45px;
+  width: 150.69px;
+  height: 40.6px;
+  left: 234px;
+  top: 410px;
+
+  background: #124c5f;
+  border-radius: 50px;
+  border: 0px;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+}
+.button:hover {
+  color: rgba(255, 170, 0, 1) !important;
+  box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+  transition: all 0.2s ease;
+}
+
+.search_bar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1000px;
+}
+
+.divBtn {
+  margin-left: 20px;
+}
+.nav_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 5px 5px 15px rgb(0 0 0 / 10%);
+
+  align-items: center;
+}
+
+.logo {
+  position: absolute;
+  width: 149px;
+  height: 44px;
+  left: 135px;
+  top: 20px;
+}
