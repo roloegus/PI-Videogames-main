@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    rating: {
+    ratings: {
       type: DataTypes.FLOAT,
       min: 1,
       max: 5

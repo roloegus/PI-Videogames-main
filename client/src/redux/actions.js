@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// const url = "http://192.168.0.29:3001";
 const url = "http://192.168.0.29:3001";
 
 export const getAllGames = () => (dispatch) => {
@@ -21,7 +22,7 @@ export const searchGame = (payload) => {
 };
 
 export const getGenres = () => (dispatch) => {
-  axios.get("http://localhost:3001/genres").then((data) => {
+  axios.get(`${url}/genres`).then((data) => {
     dispatch({
       type: "GET_GENRES",
       payload: data.data,

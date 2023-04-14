@@ -18,7 +18,7 @@ const Nav = () => {
       </div>
       <div className={styles.search_bar}>
         <SearchBar handleChange={(e) => console.log(e.target.value)} />
-        <Link to="/admin/dogs">
+        <Link to="/createGame">
           <div className={styles.divBtn}>
             <input type="submit" className={styles.button} value="Create" />
           </div>
