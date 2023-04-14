@@ -15,7 +15,7 @@ const Catalogo = () => {
   const itemsPerPage = 8;
   const videoGames = useSelector((state) => state.reducer.games);
   const genres = useSelector((state) => state.reducer.genres);
-  console.log("genres: ", genres);
+  // console.log("genres: ", genres);
   // const dogsFilter = useSelector((state) => state.reducerDogs.sortedDogs);
   // const searchedDogs = useSelector((state) => state.reducerDogs.searchedDogs);
   const [currentPage, setCurrentPage] = useState(1);

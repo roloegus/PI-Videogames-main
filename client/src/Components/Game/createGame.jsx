@@ -14,6 +14,7 @@ const CreateVideogame = () => {
   const genres = useSelector((state) => state.reducer.genres);
   // const videogames = useSelector((state) => state.reducer.games);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedPlatform, setSelectedPlatform] = useState([]);
   const [imageDog, setImageDog] = useState(null);
   const [hmin, setHmin] = useState(0);
   const [hmax, setHmax] = useState(0);
@@ -58,6 +59,11 @@ const CreateVideogame = () => {
       selectedOptions.includes(changeEvent.target.value)
         ? selectedOptions.filter((so) => so !== changeEvent.target.value)
         : [...selectedOptions, changeEvent.target.value]
+    );
+    setSelectedPlatform(
+      selectedPlatform.includes(changeEvent.target.value)
+        ? selectedPlatform.filter((so) => so !== changeEvent.target.value)
+        : [...selectedPlatform, changeEvent.target.value]
     );
     setDogsSeleccionado((prevState) => ({
       ...prevState,
@@ -193,7 +199,7 @@ const CreateVideogame = () => {
           <div className={styles.container}>
             <div className={styles.divBreed}>
               <div className={styles.TitleBreed}>
-                <p>Insert Breed</p>
+                <p>New Game</p>
               </div>
 
               <div>
@@ -212,13 +218,13 @@ const CreateVideogame = () => {
                     </div>
                   )} */}
                 <br />
-                <p className={styles.form_item}>Height</p>
+                <p className={styles.form_item}>Rating</p>
                 <div className={styles.divCamp}>
-                  <p className={styles.min}>Min</p>
+                  {/* <p className={styles.min}>Min</p> */}
                   <input
-                    className={styles.form_input}
+                    className={styles.form_name}
                     type="text"
-                    name="height"
+                    name="rating"
                     //   value={hmin ? hmin : ""}
                     //   onChange={(e) => {
                     //     setHmin(e.target.value);
@@ -230,26 +236,26 @@ const CreateVideogame = () => {
                         <p className={styles.error}>{errors.height}</p>
                       </div>
                     )} */}
-                  <p className={styles.max}>Max</p>
-                  <input
+                  {/* <p className={styles.max}>Max</p> */}
+                  {/* <input
                     className={styles.form_input}
                     type="text"
                     name="height"
-                    //   value={hmax ? hmax : ""}
-                    //   onChange={(e) => {
-                    //     setHmax(e.target.value);
-                    //   }}
-                  />
+                      value={hmax ? hmax : ""}
+                      onChange={(e) => {
+                        setHmax(e.target.value);
+                      }}
+                  /> */}
                 </div>
 
                 <br />
-                <p className={styles.form_item}>Weight</p>
+                <p className={styles.form_item}>Released</p>
                 <div className={styles.divCamp}>
-                  <p className={styles.min}>Min</p>
+                  {/* <p className={styles.min}>Min</p> */}
                   <input
-                    className={styles.form_input}
-                    type="text"
-                    name="weight"
+                    className={styles.form_name}
+                    type="date"
+                    name="released"
                     //   value={wmin ? wmin : ""}
                     //   onChange={(e) => {
                     //     setWmin(e.target.value);
@@ -261,47 +267,47 @@ const CreateVideogame = () => {
                         <p className={styles.error}>{errors.weight}</p>{" "}
                       </div>
                     )} */}
-                  <p className={styles.max}>Max</p>
+                  {/* <p className={styles.max}>Max</p>
                   <input
                     className={styles.form_input}
                     type="text"
                     name="weight"
-                    //   value={wmax ? wmax : ""}
-                    //   onChange={(e) => {
-                    //     setWmax(e.target.value);
-                    //   }}
-                  />
+                      value={wmax ? wmax : ""}
+                      onChange={(e) => {
+                        setWmax(e.target.value);
+                      }}
+                  /> */}
                 </div>
                 <br />
-                <p className={styles.form_item}>Life Span</p>
-                <div className={styles.divCamp}>
-                  <p className={styles.min}>Min</p>
+                {/* <p className={styles.form_item}>Life Span</p> */}
+                {/* <div className={styles.divCamp}> */}
+                {/* <p className={styles.min}>Min</p>
                   <input
                     className={styles.form_input}
                     type="text"
                     name="life_span"
-                    //   value={smin ? smin : ""}
-                    //   onChange={(e) => {
-                    //     setSmin(e.target.value);
-                    //   }}
-                  />
-                  {/* {errors.life_span && (
+                      value={smin ? smin : ""}
+                      onChange={(e) => {
+                        setSmin(e.target.value);
+                      }}
+                  /> */}
+                {/* {errors.life_span && (
                       <div className={styles.errorDiv}>
                         {" "}
                         <p className={styles.error}>{errors.life_span}</p>{" "}
                       </div>
                     )} */}
-                  <p className={styles.max}>Max</p>
-                  <input
+                {/* <p className={styles.max}>Max</p> */}
+                {/* <input
                     className={styles.form_input}
                     type="text"
                     name="life_span"
-                    //   value={smax ? smax : ""}
-                    //   onChange={(e) => {
-                    //     setSmax(e.target.value);
-                    //   }}
-                  />
-                </div>
+                      value={smax ? smax : ""}
+                      onChange={(e) => {
+                        setSmax(e.target.value);
+                      }}
+                  /> */}
+                {/* </div> */}
               </div>
             </div>
             <div className={styles.divTemp}>
@@ -350,25 +356,76 @@ const CreateVideogame = () => {
                   <div className={styles.container_Check2}>
                     {/* {genres
                       ? genres.map((option) => ( */}
+
                     <li className={styles.li} key={1}>
                       <input
                         type="checkbox"
+                        value="PlayStation 3"
+                        checked={selectedPlatform.includes("Play Station 3")}
+                        onChange={handleOptionChange}
+                        className={styles.check}
+                      />
+                      PlayStation 3
+                    </li>
+                    <li className={styles.li} key={2}>
+                      <input
+                        type="checkbox"
+                        value="PlayStation 4"
+                        checked={selectedPlatform.includes("Play Station 4")}
+                        onChange={handleOptionChange}
+                        className={styles.check}
+                      />
+                      PlayStation 4
+                    </li>
+                    <li className={styles.li} key={3}>
+                      <input
+                        type="checkbox"
+                        value="PlayStation 5"
+                        checked={selectedPlatform.includes("Play Station 5")}
+                        onChange={handleOptionChange}
+                        className={styles.check}
+                      />
+                      PlayStation 5
+                    </li>
+                    <li className={styles.li} key={4}>
+                      <input
+                        type="checkbox"
                         value="PC"
-                        checked={selectedOptions.includes("PC")}
+                        checked={selectedPlatform.includes("PC")}
                         onChange={handleOptionChange}
                         className={styles.check}
                       />
                       PC
                     </li>
-                    <li className={styles.li} key={2}>
+                    <li className={styles.li} key={5}>
                       <input
                         type="checkbox"
-                        value="PC2"
-                        checked={selectedOptions.includes("PC2")}
+                        value="Xbox One"
+                        checked={selectedPlatform.includes("Xbox One")}
                         onChange={handleOptionChange}
                         className={styles.check}
                       />
-                      PC2
+                      Xbox One
+                    </li>
+                    <li className={styles.li} key={6}>
+                      <input
+                        type="checkbox"
+                        value="Xbox 360"
+                        checked={selectedPlatform.includes("Xbox 360")}
+                        onChange={handleOptionChange}
+                        className={styles.check}
+                      />
+                      Xbox 360
+                    </li>
+                    <li className={styles.li} key={7}>
+                      <input
+                        type="checkbox"
+                        value="Xbox Series S/X"
+                        checked={selectedPlatform.includes("Xbox Series S/X")}
+                        onChange={handleOptionChange}
+                        className={styles.check}
+                      />
+                      Xbox Series S/X
                     </li>
                     {/* ))
                       : ""} */}

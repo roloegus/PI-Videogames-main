@@ -35,5 +35,5 @@ module.exports = (sequelize) => {
       min: 1,
       max: 5
     }
-  });
+  }, {timestamps: false});
 };
