@@ -1,16 +1,23 @@
 import axios from "axios";
 
-const url = "http://192.168.0.29:3001";
-// const url = "http://localhost:3001";
+// const url = "http://192.168.0.29:3001";
+const url = "http://localhost:3001";
 
 export const getAllGames = () => (dispatch) => {
   console.log("Entro");
   axios.get(`${url}/videogames`).then((response) => {
-    console.log("response: ",response.data);
+    console.log("response: ", response.data);
     dispatch({
       type: "GET_ALL_GAMES",
       payload: response.data,
     });
+  });
+};
+
+export const searchedGame = (payload) => {
+  axios.get(`${url}/videogames/searched/Portal`).then((response) => {
+    console.log("searchedGame response: ", response.data);
+    return response.data;
   });
 };
 

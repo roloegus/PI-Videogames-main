@@ -1,42 +1,65 @@
-// import React, { useState, useEffect } from "react";
-// import styles from "./SearchedDogs.module.css";
-// import GameCard from "../GameCard/GameCard";
-// import { useParams } from "react-router-dom";
-// import { useSelector, useDispatch } from 'react-redux'
-// // import { getDogs } from "../redux/actions/actionsDogs";
-// const SearchedGames = () => {
-//   let { id } = useParams();
-//   const [isLoading, setIsLoading] = useState(true);
+import React, { useState, useEffect } from "react";
+import styles from "./SearchedDogs.module.css";
+import axios from "axios";
+import GameCard from "../GameCard/GameCard";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { searchedGame } from "../../redux/actions";
+const SearchedGames = () => {
+  let { game } = useParams();
+  console.log("game: ", game);
+  const [isLoading, setIsLoading] = useState(true);
+  const [gameSearch, setGameSearch] = useState();
 
-//   const dispatch = useDispatch();
-//   const dogs = useSelector((state) => state.reducerDogs.dogs);
-//   const filterDogs = dogs.filter(dog => dog.name.toLowerCase().split(' ').some(name => name.startsWith(id)))
+  const dispatch = useDispatch();
+  // const dogs = useSelector((state) => state.reducerDogs.dogs);
+  // const filterDogs = dogs.filter((dog) =>
+  //   dog.name
+  //     .toLowerCase()
+  //     .split(" ")
+  //     .some((name) => name.startsWith(id))
+  // );
 
-//   useEffect(() => {
-//     dispatch(getDogs());
-//   }, [dispatch]);
-
-//   setTimeout(() => {
-
-//     setIsLoading(false); // ocultar spinner
-//   }, 4000);
-
-//   if (filterDogs.length > 0) {
-//     return (
-//       <div className={styles.container}>
-//         {filterDogs.map((t) => (
-//           <DogCard key={t.id} id={t.id} name={t.name} temperament={t.temperament} weight={t.weight} height={t.height} image={t.image} />
-//         ))}
-//       </div>
-//     );
-//   } else {
-
-//     return (
-//       <div className={styles.container2}>
-//       {isLoading ?  <div className={styles.loader}></div> :  <h1>Búsqueda no encontrada "{id}"</h1> }
-
-//       </div>
-//     );
-//   }
-// };
-// export default SearchedGames;
+  // useEffect(() => {
+  // }, [dispatch]);
+  useEffect(() => {
+    const traeJuegos = axios
+      .get(`http://192.168.0.29:3001/videogames/searched/${game}`)
+      .then((response) => {
+        console.log("searchedGame response: ", response.data);
+        setGameSearch(response.data);
+        return response.data;
+      });
+  }, []);
+  console.log("gameSearch: ", gameSearch);
+  // setTimeout(() => {
+  //   setIsLoading(false); // ocultar spinner
+  // }, 4000);
+  // return <h2>HOLAAAAAAAAAAA</h2>;
+  if (gameSearch) {
+    return (
+      <div className={styles.container}>
+        {gameSearch.map((t) => (
+          <GameCard
+            key={t.id}
+            id={t.id}
+            name={t.name}
+            image={t.background_image}
+            genres={t.genres}
+          />
+        ))}
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.container2}>
+        {/* {isLoading ? (
+          <div className={styles.loader}></div>
+        ) : ( */}
+        <h1>Búsqueda no encontrada "{game}"</h1>
+        {/* )} */}
+      </div>
+    );
+  }
+};
+export default SearchedGames;

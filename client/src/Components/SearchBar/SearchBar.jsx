@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SearchBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 // import { getDogs, searchDogsACT } from "../redux/actions/actionsDogs";
+
 const SearchBar = () => {
+  let history = useHistory();
+  var route;
   const dispatch = useDispatch();
-  // const dogs = useSelector((state) => state.reducerDogs.dogs);
   const [selectedOptions, setSelectedOptions] = useState();
-  console.log(
-    "🚀 ~ file: SearchBar.jsx:10 ~ SearchBar ~ selectedOptions",
-    selectedOptions
-  );
+  route = "/searchedGame/" + selectedOptions;
 
   const handleOptionChange = (changeEvent) => {
     setSelectedOptions(changeEvent.target.value);
   };
 
-  // const filterDogs = dogs.filter((dog) =>
-  //   dog.name
-  //     .toLowerCase()
-  //     .split(" ")
-  //     .some((name) => name.startsWith(selectedOptions))
-  // );
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(selectedOptions);
+    // if (!route) return null;
+    // history.push(`${route}`);
+    // window.location.reload(true);
   };
 
-  useEffect(() => {
-    // dispatch(getDogs());
-  }, [dispatch]);
+  const redirect = () => {
+    if (!route) return null;
+    history.push(`${route}`);
+    // window.location.reload(true);
+  };
 
   // useEffect(() => {
   //   // dispatch(searchDogsACT(filterDogs));
@@ -41,23 +39,32 @@ const SearchBar = () => {
   //   route = "/dogs/search/" + e.target.value;
   // };
 
-  // const redirect = () => {
-  //   if (!route) return null;
-  //   history.push(`${route}`);
-  //   window.location.reload(true);
-  // };
-
   return (
-    <form onSubmit={handleSubmit} className={styles.d_flex}>
-      <input type="submit" className={styles.button_search} value=" " />
+    <form className="d-flex">
       <input
-        className={styles.searchBar}
-        type="text"
-        placeholder="Search..."
+        className="form-control me-2"
+        type="search"
+        placeholder="Búsqueda..."
         aria-label="Search"
         onChange={handleOptionChange}
       />
+      <button onClick={redirect} className="button-search">
+        Buscar
+      </button>
     </form>
+    // <form onSubmit={handleSubmit} className={styles.d_flex}>
+    //   <input type="submit" className={styles.button_search} value=" " />
+    //   <input
+    //     className={styles.searchBar}
+    //     type="text"
+    //     placeholder="Search..."
+    //     aria-label="Search"
+    //     onChange={handleOptionChange}
+    //   />
+    //   <button onClick={redirect} className="button-search">
+    //     Buscar
+    //   </button>
+    // </form>
   );
 };
 
