@@ -9,7 +9,7 @@ const SearchBar = () => {
   var route;
   const dispatch = useDispatch();
   const [selectedOptions, setSelectedOptions] = useState();
-  route = "/searchedGame/" + selectedOptions;
+  route = "/searched/" + selectedOptions;
 
   const handleOptionChange = (changeEvent) => {
     setSelectedOptions(changeEvent.target.value);
@@ -25,6 +25,7 @@ const SearchBar = () => {
 
   const redirect = () => {
     if (!route) return null;
+    console.log("route: ", route);
     history.push(`${route}`);
     // window.location.reload(true);
   };

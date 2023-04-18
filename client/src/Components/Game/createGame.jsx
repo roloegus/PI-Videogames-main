@@ -3,7 +3,7 @@ import axios from "axios";
 import {
   getAllGames,
   //   postDogs,
-  //   getTemperaments
+  getGenres,
 } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./createGame.module.css";
@@ -160,13 +160,13 @@ const CreateVideogame = () => {
     }
   }, [imageDog]);
 
-  // useEffect(() => {
-  //   dispatch(getDogs());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllGames());
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getTemperaments());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getGenres());
+  }, [dispatch]);
 
   //   return <h2>Holaaaaa</h2>;
   // if (success) {

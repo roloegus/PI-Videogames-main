@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// const url = "http://192.168.0.29:3001";
-const url = "http://localhost:3001";
+const url = "http://192.168.0.29:3001";
+// const url = "http://localhost:3001";
 
 export const getAllGames = () => (dispatch) => {
-  console.log("Entro");
+  // console.log("Entro");
   axios.get(`${url}/videogames`).then((response) => {
-    console.log("response: ", response.data);
+    // console.log("response: ", response.data);
     dispatch({
       type: "GET_ALL_GAMES",
       payload: response.data,
@@ -15,8 +15,8 @@ export const getAllGames = () => (dispatch) => {
 };
 
 export const searchedGame = (payload) => {
-  axios.get(`${url}/videogames/searched/Portal`).then((response) => {
-    console.log("searchedGame response: ", response.data);
+  axios.get(`${url}/videogames/searched?game=`).then((response) => {
+    // console.log("searchedGame response: ", response.data);
     return response.data;
   });
 };
@@ -35,6 +35,14 @@ export const getGenres = () => (dispatch) => {
       payload: data.data,
     });
   });
+};
+
+export const receivePost = (payload) => {
+  console.log("payloadDD: ", payload);
+  return {
+    type: "RECEIVE_POST",
+    payload,
+  };
 };
 // export const getInitialGames = () => { //the first 20 games
 //     return async function(dispatch){

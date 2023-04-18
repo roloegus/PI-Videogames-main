@@ -4,7 +4,7 @@ import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllGames, getGenres } from "../../redux/actions";
 // import imgOr from "../img/order.svg";
-// import Paginate from "./Paginate";
+import Paginate from "../paginate/paginate";
 
 const Catalogo = () => {
   // const [currentItems, setCurrentItems] = useState();
@@ -12,21 +12,21 @@ const Catalogo = () => {
   // const [itemOffset, setItemOffset] = useState(0);
   const [data, setData] = useState();
   const [data2, setData2] = useState();
-  const itemsPerPage = 8;
+  const itemsPerPage = 15;
   const videoGames = useSelector((state) => state.reducer.games);
   const genres = useSelector((state) => state.reducer.genres);
-  // console.log("genres: ", genres);
-  // const dogsFilter = useSelector((state) => state.reducerDogs.sortedDogs);
+  const gamesFilter = useSelector((state) => state.reducer.filteredGames);
+  // console.log("FILTRADOGAMES: ", gamesFilter);
+  //const gamesFilter = useSelector((state) => state.reducerDogs.sortedDogs);
   // const searchedDogs = useSelector((state) => state.reducerDogs.searchedDogs);
   const [currentPage, setCurrentPage] = useState(1);
-  const [charactersPerPage, setCharactersPerPage] = useState(8);
-  const [indexOfLastCharacter, setIndexOfLastCharacter] = useState(8);
+  const [charactersPerPage, setCharactersPerPage] = useState(15);
+  const [indexOfLastCharacter, setIndexOfLastCharacter] = useState(15);
 
-  const [currentDogs, setCurrentDogs] = useState();
-
-  // const paginate = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
+  const [currentGames, setCurrentGames] = useState();
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const dispatch = useDispatch();
 
@@ -36,48 +36,50 @@ const Catalogo = () => {
     dispatch(getGenres());
   }, []);
 
-  // useEffect(() => {
-  //   setCurrentPage(1);
-  // }, [dogsFilter]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [gamesFilter]);
 
-  // useEffect(() => {
-  //   const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-  //   setIndexOfLastCharacter(currentPage * charactersPerPage);
-  //   if (dogsFilter && dogsFilter.length > 0) {
-  //     setCurrentDogs(
-  //       data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-  //     );
+  useEffect(() => {
+    const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+    setIndexOfLastCharacter(currentPage * charactersPerPage);
+    if (gamesFilter && gamesFilter.length > 0) {
+      setCurrentGames(
+        data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+      );
 
-  //     setData(dogsFilter);
-  //     setData2(dogsFilter);
-  //   } else {
-  //     if (searchedDogs && searchedDogs.length > 0) {
-  //       setCurrentDogs(
-  //         data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-  //       );
+      setData(gamesFilter);
+      setData2(gamesFilter);
+    }
+    // else {
+    //   if (searchedDogs && searchedDogs.length > 0) {
+    //     setCurrentDogs(
+    //       data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+    //     );
 
-  //       setData(searchedDogs);
-  //       setData2(searchedDogs);
-  //     } else {
-  //       setCurrentDogs(
-  //         data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-  //       );
+    //     setData(searchedDogs);
+    //     setData2(searchedDogs);
+    //   }
+    else {
+      setCurrentGames(
+        data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+      );
 
-  //       setData(dogs);
-  //       setData2(dogs);
-  //     }
-  //   }
-  // }, [
-  //   itemsPerPage,
-  //   dogs,
-  //   dogsFilter,
-  //   data,
-  //   data2,
-  //   searchedDogs,
-  //   charactersPerPage,
-  //   currentPage,
-  //   indexOfLastCharacter,
-  // ]);
+      setData(videoGames);
+      setData2(videoGames);
+    }
+    // }
+  }, [
+    itemsPerPage,
+    videoGames,
+    gamesFilter,
+    data,
+    data2,
+    // searchedDogs,
+    charactersPerPage,
+    currentPage,
+    indexOfLastCharacter,
+  ]);
 
   const handleSortZA = () => {
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
@@ -95,7 +97,9 @@ const Catalogo = () => {
 
       return 0;
     });
-    setCurrentDogs(dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter));
+    setCurrentGames(
+      dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter)
+    );
   };
 
   const handleSortAZ = () => {
@@ -115,7 +119,9 @@ const Catalogo = () => {
 
       return 0;
     });
-    setCurrentDogs(dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter));
+    setCurrentGames(
+      dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter)
+    );
   };
   const sortWeightAsc = () => {
     // .reduce((a, b) => a + b, 0)
@@ -123,31 +129,43 @@ const Catalogo = () => {
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
 
     const dataCopy = [...data];
+
     dataCopy.sort((a, b) => {
-      let weightA = a.weight.split(" - ").map((n) => Number(n));
-      let weightB = b.weight.split(" - ").map((n) => Number(n));
-      if (weightA[1] > weightB[1]) return 1;
-      if (weightA[1] < weightB[1]) return -1;
-      if (weightA[0] > weightB[0]) return 1;
-      if (weightA[0] < weightB[0]) return -1;
+      const nameA = a.rating; // ignore upper and lowercase
+      const nameB = b.rating;
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
       return 0;
     });
-    setCurrentDogs(dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter));
+    setCurrentGames(
+      dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter)
+    );
   };
   const sortWeightDesc = () => {
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
 
     const dataCopy = [...data];
-    dataCopy.sort((a, b) => {
-      let weightA = a.weight.split(" - ").map((n) => Number(n));
-      let weightB = b.weight.split(" - ").map((n) => Number(n));
-      if (weightA[0] < weightB[0]) return 1;
-      if (weightA[0] > weightB[0]) return -1;
-      if (weightA[1] < weightB[1]) return 1;
-      if (weightA[1] > weightB[1]) return -1;
+
+    dataCopy.sort((b, a) => {
+      const nameA = a.rating; // ignore upper and lowercase
+      const nameB = b.rating;
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
       return 0;
     });
-    setCurrentDogs(dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter));
+    setCurrentGames(
+      dataCopy.slice(indexOfFirstCharacter, indexOfLastCharacter)
+    );
   };
 
   return (
@@ -174,20 +192,26 @@ const Catalogo = () => {
             type="submit"
             className="btnSort"
             onClick={sortWeightAsc}
-            value="Weight Asc"
+            value="Rating Asc"
           />
           <input
             type="submit"
             className="btnSort"
             onClick={sortWeightDesc}
-            value="Weight Desc"
+            value="Rating Desc"
           />
         </div>
       </div>
-
+      <div className="DivPagi">
+        <Paginate
+          charactersPerPage={charactersPerPage}
+          allCharacters={data && data.length}
+          paginate={paginate}
+        />
+      </div>
       <div className="container">
         {videoGames[1] ? (
-          videoGames.map((t) => (
+          currentGames.map((t) => (
             <GameCard
               key={t.id}
               id={t.id}
@@ -200,7 +224,6 @@ const Catalogo = () => {
           <h3>loading</h3>
         )}
       </div>
-      <div className="DivPagi"></div>
     </div>
   );
 };

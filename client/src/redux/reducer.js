@@ -1,5 +1,6 @@
 const initialState = {
   games: [],
+  filteredGames: [],
   genres: [],
   // initialGames: [],
   // currentPages: [],
@@ -11,12 +12,12 @@ const initialState = {
   //     originData: ""
   // },
   // detailsGame: [],
-  page: 1, //current page
-  pages: 5, //total pages
+  // page: 1, //current page
+  // pages: 5, //total pages
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
-  console.log("payload: ", payload);
+  // console.log("payload: ", payload);
 
   switch (type) {
     case "GET_ALL_GAMES":
@@ -25,7 +26,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         games: payload,
       };
 
-      case "GET_GENRES":
+    case "GET_GENRES":
       return {
         ...state,
         genres: payload,
@@ -49,6 +50,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         pages: payload.length,
         counterGames: payload.length,
         page: 1,
+      };
+
+    case "RECEIVE_POST":
+      return {
+        ...state,
+        filteredGames: payload,
       };
 
     // case RESTART_CURRENT_PAGE: return {
