@@ -16,6 +16,7 @@ const Catalogo = () => {
   const videoGames = useSelector((state) => state.reducer.games);
   const genres = useSelector((state) => state.reducer.genres);
   const gamesFilter = useSelector((state) => state.reducer.filteredGames);
+  const filteredFromRedux = useSelector((state) => state.reducer.filteredFrom);
   // console.log("FILTRADOGAMES: ", gamesFilter);
   //const gamesFilter = useSelector((state) => state.reducerDogs.sortedDogs);
   // const searchedDogs = useSelector((state) => state.reducerDogs.searchedDogs);
@@ -61,12 +62,34 @@ const Catalogo = () => {
     //     setData2(searchedDogs);
     //   }
     else {
-      setCurrentGames(
-        data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-      );
-
-      setData(videoGames);
-      setData2(videoGames);
+      if (filteredFromRedux == "BD") {
+        const filteredGamesFromDB = videoGames.filter(
+          (juego) => juego.from_db === true
+        );
+        setCurrentGames(
+          data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+        );
+        setData(filteredGamesFromDB);
+        setData2(filteredGamesFromDB);
+      } else if (filteredFromRedux == "API") {
+        const filteredGamesFromDB = videoGames.filter((juego) => juego.slug);
+        setCurrentGames(
+          data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+        );
+        setData(filteredGamesFromDB);
+        setData2(filteredGamesFromDB);
+      } else {
+        setCurrentGames(
+          data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+        );
+        setData(videoGames);
+        setData2(videoGames);
+      }
+      // setCurrentGames(
+      //   data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+      // );
+      // setData(videoGames);
+      // setData2(videoGames);
     }
     // }
   }, [

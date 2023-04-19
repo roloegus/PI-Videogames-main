@@ -28,7 +28,8 @@ export const searchGame = (payload) => {
   };
 };
 
-export const filteredFrom = (payload) => {
+export const filteredFromRedux = (payload) => {
+  console.log("payload ACTION: ", payload);
   return {
     type: "FILTERED_FROM",
     payload,

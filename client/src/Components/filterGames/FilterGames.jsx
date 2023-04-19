@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./FilterGames.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getGenres } from "../../redux/actions";
-import { searchGame, receivePost, getAllGames } from "../../redux/actions";
+import {
+  searchGame,
+  receivePost,
+  getAllGame,
+  filteredFromRedux,
+} from "../../redux/actions";
 
 const FilterGames = () => {
   const SearchedGames = useSelector((state) => state.reducer.searchGame);
@@ -13,11 +18,13 @@ const FilterGames = () => {
   //   searchGame
   // );
   const genres = useSelector((state) => state.reducer.genres);
-  const games = useSelector((state) => state.reducer.games);
+  let games = useSelector((state) => state.reducer.games);
   // console.log("GAMES", games);
   const dispatch = useDispatch();
   const [data, setData] = useState();
   const [fromDB, setFromDB] = useState("Todos");
+  let filteredGames;
+  // let fromDB;
 
   useEffect(() => {
     dispatch(getGenres());
@@ -51,17 +58,47 @@ const FilterGames = () => {
     setFromDB(event.target.value);
     console.log("event.target.value: ", event.target.value);
     console.log("fromDB: ", fromDB);
-    if (event.target.value == "BD") {
-      filterFromDB();
-    } else if (event.target.value == "API") {
-      filterFromAPI();
-    } else {
-      dispatch(getAllGames());
-    }
-    // event.preventDefault();
+    // if (event.target.value == "BD") {
+    //   filterFromDB();
+    // } else if (event.target.value == "API") {
+    //   filterFromAPI();
+    // } else {
+    //   dispatch(getAllGames());
+    // }
 
-    // setData(filterFromDB());
-    // dispatch(receivePost(fromDB));
+    if (event.target.value == "BD") {
+      dispatch(filteredFromRedux("BD"));
+      const filteredGamesFromDB = games.filter(
+        (juego) => juego.from_db === true
+      );
+      console.log("filteredGamesFromDB 2222: ", filteredGamesFromDB);
+      filteredGames = filteredGamesFromDB.filter((juego) =>
+        juego.genres.some((genero) => selectedOptions.includes(genero.name))
+      );
+      console.log("BBDDDDDDDDDDDDDDD 2222: ", filteredGames);
+      setData(filteredGames);
+      // filterFromDB();
+    } else if (event.target.value == "API") {
+      dispatch(filteredFromRedux("API"));
+      const filteredGamesFromAPI = games.filter((juego) => juego.slug);
+      console.log("filteredGamesFromAPI 2222: ", filteredGamesFromAPI);
+      filteredGames = filteredGamesFromAPI.filter((juego) =>
+        juego.genres.some((genero) => selectedOptions.includes(genero.name))
+      );
+      console.log("APIIIIIIIIIIIII 22222: ", filteredGames);
+      setData(filteredGames);
+      // setData(filteredGames);
+      // filterFromAPI();
+    } else {
+      dispatch(filteredFromRedux("Todos"));
+      filteredGames = games.filter((juego) =>
+        juego.genres.some((genero) => selectedOptions.includes(genero.name))
+      );
+      setData(filteredGames);
+      console.log("TODOOOOOOOOSSSSSSSSSSSS 22222: ", filteredGames);
+      // setData(filteredGames);
+      // dispatch(getAllGames());
+    }
   };
 
   // SearchedGames && SearchedGames.length > 0
@@ -76,9 +113,43 @@ const FilterGames = () => {
   //   game.genres.map((genre) => (game.genres = genre.name))
   // );
   // console.log("ASDASD", asd);
-  const filteredGames = games.filter((juego) =>
-    juego.genres.some((genero) => selectedOptions.includes(genero.name))
-  );
+
+  if (fromDB == "BD") {
+    const filteredGamesFromDB = games.filter((juego) => juego.from_db === true);
+    filteredGames = filteredGamesFromDB.filter((juego) =>
+      juego.genres
+        // .filter((juego) => juego.from_db === true)
+        .some((genero) => selectedOptions.includes(genero.name))
+    );
+    console.log("BBDDDDDDDDDDDDDDD: ", filteredGames);
+    // setData(filteredGames);
+    // filterFromDB();
+  } else if (fromDB == "API") {
+    const filteredGamesFromAPI = games.filter((juego) => juego.slug);
+    filteredGames = filteredGamesFromAPI.filter((juego) =>
+      juego.genres
+        // .filter((juego) => juego.slug)
+        .some((genero) => selectedOptions.includes(genero.name))
+    );
+    console.log("APIIIIIIIIIIIII: ", filteredGames);
+    // setData(filteredGames);
+    // filterFromAPI();
+  } else {
+    console.log("selectedOptions: ", selectedOptions);
+    if (selectedOptions[0]) {
+      filteredGames = games.filter((juego) =>
+        juego.genres.some((genero) => selectedOptions.includes(genero.name))
+      );
+    } else {
+      filteredGames = [];
+      // dispatch(receivePost(filteredGames));
+      // games = [];
+    }
+    console.log("TODOOOOOOOOSSSSSSSSSSSS: ", filteredGames);
+    // setData(filteredGames);
+    // dispatch(getAllGames());
+  }
+
   // console.log("FILTRADO", filteredGames);
   // dispatch(getAllGames(filteredGames));
 
