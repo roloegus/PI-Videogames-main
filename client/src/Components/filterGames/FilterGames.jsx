@@ -7,6 +7,7 @@ import { searchGame, receivePost, getAllGames } from "../../redux/actions";
 
 const FilterGames = () => {
   const SearchedGames = useSelector((state) => state.reducer.searchGame);
+  const filteredFrom = useSelector((state) => state.reducer.filteredFrom);
   // console.log(
   //   "🚀 ~ file: Catalogo.jsx:20 ~ Catalogo ~ searchedDogs",
   //   searchGame

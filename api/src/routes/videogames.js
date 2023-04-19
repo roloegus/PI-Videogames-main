@@ -55,7 +55,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  // console.log(req);
+  console.log(req.body);
   try {
     const videogameAdded = await addVideogame(req.body);
     res.status(200).json(videogameAdded);

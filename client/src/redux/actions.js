@@ -28,6 +28,13 @@ export const searchGame = (payload) => {
   };
 };
 
+export const filteredFrom = (payload) => {
+  return {
+    type: "FILTERED_FROM",
+    payload,
+  };
+};
+
 export const getGenres = () => (dispatch) => {
   axios.get(`${url}/genres`).then((data) => {
     dispatch({
@@ -44,6 +51,47 @@ export const receivePost = (payload) => {
     payload,
   };
 };
+
+export const postGames = (gameSeleccionado) => (dispatch) => {
+  // console.log("gameSeleccionado 111: ", gameSeleccionado);
+
+  //Para los géneros
+  const genres = gameSeleccionado.genres;
+  const genresObj = genres.map((genre) => {
+    console.log("genre: ", genre);
+    return { name: genre };
+  });
+  // console.log("genresObj AAA: ", genresObj);
+  gameSeleccionado.genres = genresObj;
+
+  //Para los géneros
+  const plats = gameSeleccionado.platforms;
+  const platsObj = plats.map((pla) => {
+    console.log("pla: ", pla);
+    return { name: pla };
+  });
+  // console.log("platsObj BBB: ", platsObj);
+  gameSeleccionado.platforms = platsObj;
+
+  // console.log("gameSeleccionado 222: ", gameSeleccionado);
+  axios
+    .post(`${url}/videogames`, {
+      name: gameSeleccionado.name,
+      description: gameSeleccionado.description,
+      rating: gameSeleccionado.rating,
+      genres: gameSeleccionado.genres,
+      platforms: gameSeleccionado.platforms,
+      background_image: gameSeleccionado.background_image,
+      released: gameSeleccionado.released,
+    })
+    .then((data) => {
+      dispatch({
+        type: "POST_GAMES",
+        payload: data.data,
+      });
+    });
+};
+
 // export const getInitialGames = () => { //the first 20 games
 //     return async function(dispatch){
 //         try {
@@ -184,22 +232,6 @@ export const receivePost = (payload) => {
 // export const clearFilters = ()=> {
 //     return {
 //         type: CLEAR_FILTERS
-//     }
-// }
-
-// export function createGame(data){
-//     return async function(dispatch){
-//         try{
-//             await axios.post(`/videogames`, data)
-//             return dispatch({
-//                 type: CREATE_GAME,
-//                 payload: {...data, createdByUser: true}
-//             }
-//         )
-//         }
-//         catch(err){
-//             throw new Error('Could not create the game')
-//         }
 //     }
 // }
 

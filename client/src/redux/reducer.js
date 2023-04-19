@@ -2,6 +2,7 @@ const initialState = {
   games: [],
   filteredGames: [],
   genres: [],
+  filteredFrom: "Todos",
   // initialGames: [],
   // currentPages: [],
   // filteredPages: [],
@@ -17,7 +18,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
-  // console.log("payload: ", payload);
+  console.log("REDUCER payload: ", payload);
 
   switch (type) {
     case "GET_ALL_GAMES":
@@ -52,10 +53,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
         page: 1,
       };
 
+    case "FILTERED_FROM":
+      return {
+        ...state,
+        filteredFrom: payload,
+      };
+
     case "RECEIVE_POST":
       return {
         ...state,
         filteredGames: payload,
+      };
+
+    case "POST_GAMES":
+      return {
+        games: [...state.games, payload],
       };
 
     // case RESTART_CURRENT_PAGE: return {

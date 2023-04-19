@@ -6,7 +6,7 @@ const addVideogame = async ({
   description,
   released,
   background_image,
-  ratings,
+  rating,
   platforms,
   genres,
 }) => {
@@ -15,7 +15,7 @@ const addVideogame = async ({
     description,
     released,
     background_image,
-    ratings,
+    rating,
     platforms,
   });
 
@@ -49,6 +49,5 @@ const addVideogame = async ({
 
   return newVideogameFromDB;
 };
-
 
 module.exports = addVideogame;
