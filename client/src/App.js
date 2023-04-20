@@ -25,6 +25,7 @@ function App() {
         </div>
         <Route exact path="/home" component={Catalogo} />
       </div>
+      <Route exact path="/game/:id" component={NavCreate} />
       <Route exact path="/game/:id" component={Game} />
       <Route exact path="/createGame" component={NavCreate} />
       <Route exact path="/createGame" component={CreateGame} />

@@ -17,9 +17,26 @@ const Game = () => {
     dispatch(getAllGames());
     console.log("id: ", id);
     console.log("videoGames: ", videoGames);
+
+    // const platforms = [
+    //   "{\"name\":\"PlayStation 5\"}"
+    // ];
+
+    if (result[0].description) {
+      const convertedPlatforms = result[0].platforms.map((platform) => {
+        const platformObject = JSON.parse(platform);
+        platformObject.name = "PlayStation 5";
+        return {
+          platform: platformObject,
+        };
+      });
+      console.log("convertedPlatforms: ", convertedPlatforms);
+      result[0].platforms = convertedPlatforms;
+    }
+
     console.log("result: ", result);
     setData(result[0]);
-  }, [id, result]);
+  }, [id]);
 
   useEffect(() => {
     dispatch(getAllGames());
@@ -44,21 +61,38 @@ const Game = () => {
               </div>
 
               <div className={styles.container_data}>
-                <div className={styles.TitleBreedE}>
+                <p className={styles.temlabel}>
+                  ID: <label className={styles.description}>{data.id}</label>
+                </p>
+                <p className={styles.temlabel}>
+                  Name:{" "}
+                  <label className={styles.description}>{data.name}</label>
+                </p>
+                {/* <div className={styles.TitleBreedE}>
                   <p className={styles.card_title}>{data.name}</p>
-                </div>
+                </div> */}
                 <div className={styles.date}>
                   {data?.description ? (
                     <div>
-                      <p className={styles.temlabel}>Descripción</p>
+                      {/* <p className={styles.temlabel}>Descripción</p>
                       <label className={styles.description}>
                         {data.description}
-                      </label>
+                      </label> */}
+
+                      <p className={styles.temlabel}>
+                        Description:{" "}
+                        <label className={styles.description}>
+                          {data.description}
+                        </label>
+                      </p>
                     </div>
                   ) : (
-                    <label className={styles.description}>
-                      Doesn't have any description
-                    </label>
+                    <p className={styles.temlabel}>
+                      Description:{" "}
+                      <label className={styles.description}>
+                        Doesn't have any description
+                      </label>
+                    </p>
                     // <h2>Doesn't have any description</h2>
                   )}
                 </div>
@@ -66,7 +100,7 @@ const Game = () => {
                 <div className={styles.temp}>
                   {data.platforms ? (
                     data.platforms.map((e) => (
-                      <label className={styles.label} key={e.id}>
+                      <label className={styles.labelPlatform} key={e.id}>
                         {e.platform.name}
                       </label>
                     ))
@@ -81,6 +115,14 @@ const Game = () => {
                     </label>
                   )}
                 </div>
+                <p className={styles.temlabel}>
+                  Released:{" "}
+                  <label className={styles.description}>{data.released}</label>
+                </p>
+                <p className={styles.temlabel}>
+                  Rating:{" "}
+                  <label className={styles.description}>{data.rating}</label>
+                </p>
                 <p className={styles.temlabel}>Genres</p>
                 <div className={styles.temp}>
                   {data.genres ? (

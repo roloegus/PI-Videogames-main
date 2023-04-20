@@ -6,6 +6,7 @@ import {
   getAllGames,
   getGenres,
   selectedOptionsRedux,
+  filteredFromRedux,
 } from "../../redux/actions";
 // import imgOr from "../img/order.svg";
 import Paginate from "../Paginate/Paginate";
@@ -20,7 +21,7 @@ const Catalogo = () => {
   const videoGames = useSelector((state) => state.reducer.games);
   const genres = useSelector((state) => state.reducer.genres);
   const gamesFilter = useSelector((state) => state.reducer.filteredGames);
-  const filteredFromRedux = useSelector((state) => state.reducer.filteredFrom);
+  let filteredFromRedux2 = useSelector((state) => state.reducer.filteredFrom);
   const selectedGenresRedux = useSelector(
     (state) => state.reducer.selectedOptions
   );
@@ -42,6 +43,7 @@ const Catalogo = () => {
     // console.log("genres: ", genres);
     dispatch(getAllGames());
     dispatch(getGenres());
+    dispatch(filteredFromRedux("Todos"));
   }, []);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const Catalogo = () => {
 
   useEffect(() => {
     filterVideoGames();
-  }, [filteredFromRedux]);
+  }, [filteredFromRedux2]);
 
   useEffect(() => {
     filterVideoGames();
@@ -66,10 +68,10 @@ const Catalogo = () => {
 
   function filterVideoGames() {
     let filteredVideoGames = videoGames;
-    if (filteredFromRedux == "BD") {
+    if (filteredFromRedux2 == "BD") {
       filteredVideoGames = videoGames.filter((juego) => juego.from_db);
     }
-    if (filteredFromRedux == "API") {
+    if (filteredFromRedux2 == "API") {
       filteredVideoGames = videoGames.filter((juego) => juego.slug);
     }
 

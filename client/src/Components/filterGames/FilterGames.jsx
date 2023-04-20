@@ -3,9 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./FilterGames.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getGenres, selectedOptionsRedux } from "../../redux/actions";
-import {
-  filteredFromRedux,
-} from "../../redux/actions";
+import { filteredFromRedux } from "../../redux/actions";
 
 const FilterGames = () => {
   // console.log(
@@ -17,7 +15,6 @@ const FilterGames = () => {
   const dispatch = useDispatch();
   const [fromDB, setFromDB] = useState("Todos");
 
-
   useEffect(() => {
     dispatch(getGenres());
   }, [dispatch]);
@@ -25,31 +22,21 @@ const FilterGames = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleOptionChange = (changeEvent) => {
-    
-      let options = selectedOptions.includes(changeEvent.target.value)
+    let options = selectedOptions.includes(changeEvent.target.value)
       ? selectedOptions.filter((so) => so !== changeEvent.target.value)
       : [...selectedOptions, changeEvent.target.value];
-      
-      setSelectedOptions(
-        options
-      );
-      dispatch(selectedOptionsRedux(options));
-    
+
+    setSelectedOptions(options);
+    dispatch(selectedOptionsRedux(options));
   };
 
   const handleSubmit = (event) => {
-
-    if (fromDB!= event.target.value){
-      console.log(fromDB, event.target.value)
-      setFromDB(
-        event.target.value
-      );
+    if (fromDB != event.target.value) {
+      console.log(fromDB, event.target.value);
+      setFromDB(event.target.value);
       dispatch(filteredFromRedux(event.target.value));
     }
-    
   };
-
-
 
   return (
     <div>
