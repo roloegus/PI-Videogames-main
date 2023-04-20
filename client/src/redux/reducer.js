@@ -3,6 +3,7 @@ const initialState = {
   filteredGames: [],
   genres: [],
   filteredFrom: "Todos",
+  selectedOptions: [],
   // initialGames: [],
   // currentPages: [],
   // filteredPages: [],
@@ -57,6 +58,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         filteredFrom: payload,
+      };
+
+    case "SELECTED_OPTIONS":
+      return {
+        ...state,
+        selectedOptions: payload,
       };
 
     case "RECEIVE_POST":

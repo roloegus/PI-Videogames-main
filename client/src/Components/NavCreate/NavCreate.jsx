@@ -1,9 +1,9 @@
 import React from "react";
 // import Logo from "../img/logo.png";
-import SearchBar from "../SearchBar/SearchBar";
+// import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
-import styles from "./Nav.module.css";
-const Nav = () => {
+import styles from "./NavCreate.module.css";
+const NavCreate = () => {
   return (
     <nav className={styles.nav_container}>
       <div className="img-container">
@@ -16,7 +16,7 @@ const Nav = () => {
           </Link>
         </div>
       </div>
-      <div className={styles.search_bar}>
+      {/* <div className={styles.search_bar}>
         <SearchBar handleChange={(e) => console.log(e.target.value)} />
         <Link to="/createGame">
           <div className={styles.divBtn}>
@@ -24,9 +24,9 @@ const Nav = () => {
           </div>
         </Link>
       </div>
-      <br />
+      <br /> */}
     </nav>
   );
 };
 
-export default Nav;
+export default NavCreate;

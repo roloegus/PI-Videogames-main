@@ -8,6 +8,7 @@ import CreateGame from "./Components/Game/createGame";
 import Nav from "./Components/NavBar/Nav";
 // import CreateDog from "./componentes/CreateDog";
 import FilterGames from "./Components/filterGames/FilterGames";
+import NavCreate from "./Components/NavCreate/NavCreate";
 import "./App.css";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/home" component={Catalogo} />
       </div>
       <Route exact path="/game/:id" component={Game} />
+      <Route exact path="/createGame" component={NavCreate} />
       <Route exact path="/createGame" component={CreateGame} />
       <Route exact path="/searched/:game" component={Searched} />
     </div>

@@ -8,6 +8,7 @@ import {
   receivePost,
   getAllGame,
   filteredFromRedux,
+  selectedOptionsRedux,
 } from "../../redux/actions";
 
 const FilterGames = () => {
@@ -37,6 +38,13 @@ const FilterGames = () => {
       selectedOptions.includes(changeEvent.target.value)
         ? selectedOptions.filter((so) => so !== changeEvent.target.value)
         : [...selectedOptions, changeEvent.target.value]
+    );
+    dispatch(
+      selectedOptionsRedux(
+        selectedOptions.includes(changeEvent.target.value)
+          ? selectedOptions.filter((so) => so !== changeEvent.target.value)
+          : [...selectedOptions, changeEvent.target.value]
+      )
     );
   };
 

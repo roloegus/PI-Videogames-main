@@ -17,6 +17,9 @@ const Catalogo = () => {
   const genres = useSelector((state) => state.reducer.genres);
   const gamesFilter = useSelector((state) => state.reducer.filteredGames);
   const filteredFromRedux = useSelector((state) => state.reducer.filteredFrom);
+  const selectedOptionsRedux = useSelector(
+    (state) => state.reducer.selectedOptions
+  );
   // console.log("FILTRADOGAMES: ", gamesFilter);
   //const gamesFilter = useSelector((state) => state.reducerDogs.sortedDogs);
   // const searchedDogs = useSelector((state) => state.reducerDogs.searchedDogs);
@@ -44,11 +47,10 @@ const Catalogo = () => {
   useEffect(() => {
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
     setIndexOfLastCharacter(currentPage * charactersPerPage);
+    setCurrentGames(
+      data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+    );
     if (gamesFilter && gamesFilter.length > 0) {
-      setCurrentGames(
-        data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-      );
-
       setData(gamesFilter);
       setData2(gamesFilter);
     }
@@ -62,29 +64,40 @@ const Catalogo = () => {
     //     setData2(searchedDogs);
     //   }
     else {
-      if (filteredFromRedux == "BD") {
-        const filteredGamesFromDB = videoGames.filter(
-          (juego) => juego.from_db === true
-        );
-        setCurrentGames(
-          data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-        );
-        setData(filteredGamesFromDB);
-        setData2(filteredGamesFromDB);
-      } else if (filteredFromRedux == "API") {
-        const filteredGamesFromDB = videoGames.filter((juego) => juego.slug);
-        setCurrentGames(
-          data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-        );
-        setData(filteredGamesFromDB);
-        setData2(filteredGamesFromDB);
+      let filteredGamesFromDB;
+      if (
+        selectedOptionsRedux &&
+        selectedOptionsRedux.length > 0 &&
+        gamesFilter &&
+        gamesFilter.length == 0
+      ) {
+        filteredGamesFromDB = [];
       } else {
-        setCurrentGames(
-          data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
-        );
-        setData(videoGames);
-        setData2(videoGames);
+        if (filteredFromRedux == "BD") {
+          filteredGamesFromDB = videoGames.filter(
+            (juego) => juego.from_db === true
+          );
+          // setCurrentGames(
+          //   data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+          // );
+          // setData(filteredGamesFromDB);
+          // setData2(filteredGamesFromDB);
+        } else if (filteredFromRedux == "API") {
+          filteredGamesFromDB = videoGames.filter((juego) => juego.slug);
+          // setCurrentGames(
+          //   data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+          // );
+          // setData(filteredGamesFromDB);
+          // setData2(filteredGamesFromDB);
+        } else {
+          filteredGamesFromDB = videoGames;
+        }
       }
+      // setCurrentGames(
+      //   data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
+      // );
+      setData(filteredGamesFromDB);
+      setData2(filteredGamesFromDB);
       // setCurrentGames(
       //   data && data.slice(indexOfFirstCharacter, indexOfLastCharacter)
       // );

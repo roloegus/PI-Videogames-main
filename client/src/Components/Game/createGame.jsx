@@ -8,35 +8,35 @@ import styles from "./createGame.module.css";
 
 const CreateVideogame = () => {
   const genres = useSelector((state) => state.reducer.genres);
-  // const videogames = useSelector((state) => state.reducer.games);
+  const videogames = useSelector((state) => state.reducer.games);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedPlatform, setSelectedPlatform] = useState([]);
   const [imageGame, setImageGame] = useState(null);
-  const [rating, setRating] = useState(0);
-  const [released, setReleased] = useState(0);
-  const [hmin, setHmin] = useState(0);
-  const [hmax, setHmax] = useState(0);
-  const [wmin, setWmin] = useState(0);
-  const [wmax, setWmax] = useState(0);
-  const [smin, setSmin] = useState(0);
-  const [smax, setSmax] = useState(0);
+  // const [rating, setRating] = useState(0);
+  // const [released, setReleased] = useState(0);
+  // const [hmin, setHmin] = useState(0);
+  // const [hmax, setHmax] = useState(0);
+  // const [wmin, setWmin] = useState(0);
+  // const [wmax, setWmax] = useState(0);
+  // const [smin, setSmin] = useState(0);
+  // const [smax, setSmax] = useState(0);
   const [success, setSuccess] = useState(false);
-  const [DogsSeleccionado, setDogsSeleccionado] = useState({
-    name: "",
-    height: `${hmin} - ${hmax}`,
-    weight: `${wmin} - ${wmax}`,
-    life_span: `${smin} - ${smax}`,
-    temperament: [],
-    image: "",
-  });
+  // const [DogsSeleccionado, setDogsSeleccionado] = useState({
+  //   name: "",
+  //   height: `${hmin} - ${hmax}`,
+  //   weight: `${wmin} - ${wmax}`,
+  //   life_span: `${smin} - ${smax}`,
+  //   temperament: [],
+  //   image: "",
+  // });
   const [gamesSeleccionado, setGamesSeleccionado] = useState({
     name: "",
     description: "",
     released: "", //"2020/02/02",
     background_image: "",
     rating: 0,
-    platforms: [{}],
-    genres: [{}],
+    platforms: [],
+    genres: [],
   });
   // console.log(
   //   "🚀 ~ file: CreateDog.jsx:36 ~ CreateDog ~ DogsSeleccionado",
@@ -88,48 +88,33 @@ const CreateVideogame = () => {
     console.log("selectedPlatform 11: ", selectedPlatform);
   };
 
-  // const dogIsNotSame = dogs.filter((e) => e.name === DogsSeleccionado.name);
+  const gameIsNotSame = videogames.filter(
+    (e) => e.name === gamesSeleccionado.name
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(selectedOptions);
 
     // console.log("selectedPlatform: ", selectedPlatform);
-    const pattern = /^[a-zA-Z\s]+$/;
+    // const pattern = /^[a-zA-Z\s]+$/;
     let formErrors = {};
-    setErrors(formErrors);
-    console.log(errors);
-    // if (Object.keys(formErrors).length === 0) {
-    setGamesSeleccionado((prevState) => ({
-      ...prevState,
-      genres: selectedOptions,
-      platforms: selectedPlatform,
-      // height: `${hmin} - ${hmax}`,
-      // weight: `${wmin} - ${wmax}`,
-      // life_span: `${smin} - ${smax}`,
-    }));
-    imageUpload();
-    // console.log("game: ", gamesSeleccionado);
-    dispatch(postGames(gamesSeleccionado));
-    setSuccess(true);
-    // }
-    // if (dogIsNotSame.length !== 0) {
-    //   formErrors.name = "Name already exist";
-    // }
-    // if (!pattern.test(DogsSeleccionado.name)) {
+    if (gameIsNotSame.length !== 0) {
+      console.log("gameIsNotSame: ", gameIsNotSame);
+      formErrors.name = "Name already exist";
+    }
+    // if (!pattern.test(gamesSeleccionado.name)) {
     //   formErrors.name = "Name should only have letters";
     // }
-    // if (!DogsSeleccionado.name) {
-    //   formErrors.name = "Name is required";
-    // }
-    // if (hmin === 0 || hmax === 0) {
-    //   formErrors.height = "height is required";
-    // } else if (isNaN(hmin && hmax)) {
-    //   formErrors.height = "height is invalid";
-    // } else if (hmin > hmax) {
-    //   formErrors.height = "max should be greater";
-    // } else if (hmin > 99 || hmax > 99 || hmin < 0 || hmax < 0) {
-    //   formErrors.height = "Number should be between 0 and 99";
-    // }
+    if (!gamesSeleccionado.name) {
+      formErrors.name = "Name is required";
+    }
+    if (gamesSeleccionado.rating > 5 || gamesSeleccionado.rating < 1) {
+      formErrors.rating = "Rating should be between 1 and 5";
+    }
+    if (gamesSeleccionado.genres.length === 0) {
+      formErrors.genres = "Genres is required";
+    }
     // if (wmin === 0 || wmax === 0) {
     //   formErrors.weight = "weight is required";
     // } else if (isNaN(wmin && wmax)) {
@@ -148,27 +133,41 @@ const CreateVideogame = () => {
     // } else if (smin > 99 || smax > 99 || smin < 0 || smax < 0) {
     //   formErrors.life_span = "Number should be between 0 and 99";
     // }
-    // if (DogsSeleccionado.temperament.length === 0) {
-    //   formErrors.temperament = "temperament is required";
-    // }
     // if (!DogsSeleccionado.image) {
     //   formErrors.image = "Image is required";
     // }
-  };
-
-  const imageUpload = () => {
-    if (imageGame) {
-      if (imageGame.type === "image/jpeg" || imageGame.type === "image/png") {
-        const formData = new FormData();
-        formData.append("myFile", imageGame, imageGame.name);
-        axios.post("http://181.127.189.247:3001/vehicles/image", formData);
-      }
+    setErrors(formErrors);
+    console.log(errors);
+    if (Object.keys(formErrors).length === 0) {
+      setGamesSeleccionado((prevState) => ({
+        ...prevState,
+        genres: selectedOptions,
+        platforms: selectedPlatform,
+        // height: `${hmin} - ${hmax}`,
+        // weight: `${wmin} - ${wmax}`,
+        // life_span: `${smin} - ${smax}`,
+      }));
+      // imageUpload();
+      // console.log("game: ", gamesSeleccionado);
+      // dispatch(postGames(gamesSeleccionado));
+      dispatch(postGames(gamesSeleccionado, imageGame));
+      setSuccess(true);
     }
   };
+
+  // const imageUpload = () => {
+  //   if (imageGame && imageGame.name) {
+  //     if (imageGame.type === "image/jpeg" || imageGame.type === "image/png") {
+  //       const formData = new FormData();
+  //       formData.append("myFile", imageGame, imageGame.name);
+  //       axios.post("http://181.127.189.247:3001/vehicles/image", formData);
+  //     }
+  //   }
+  // };
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (imageGame) {
+    if (imageGame && imageGame.name) {
       setGamesSeleccionado((prevState) => ({
         ...prevState,
         background_image: `http://181.127.189.247:8081/Vehiculos/${imageGame.name}`,
@@ -227,12 +226,12 @@ const CreateVideogame = () => {
                   value={gamesSeleccionado ? gamesSeleccionado.name : ""}
                   onChange={handleChange}
                 />
-                {/* {errors.name && (
-                    <div className={styles.errorDivName}>
-                      {" "}
-                      <p className={styles.error}>{errors.name}</p>
-                    </div>
-                  )} */}
+                {errors.name && (
+                  <div className={styles.errorDivName}>
+                    {" "}
+                    <p className={styles.error}>{errors.name}</p>
+                  </div>
+                )}
                 <br />
 
                 <p className={styles.form_item}>Descripción</p>
@@ -260,12 +259,12 @@ const CreateVideogame = () => {
                     value={gamesSeleccionado ? gamesSeleccionado.rating : ""}
                     onChange={handleChange}
                   />
-                  {/* {errors.height && (
-                      <div className={styles.errorDiv}>
-                        {" "}
-                        <p className={styles.error}>{errors.height}</p>
-                      </div>
-                    )} */}
+                  {errors.rating && (
+                    <div className={styles.errorDivRating}>
+                      {" "}
+                      <p className={styles.error}>{errors.rating}</p>
+                    </div>
+                  )}
                   {/* <p className={styles.max}>Max</p> */}
                   {/* <input
                     className={styles.form_input}
@@ -364,12 +363,12 @@ const CreateVideogame = () => {
                 <div className={styles.TitleBreed}>
                   <p>Genres</p>
                 </div>
-                {/* {errors.temperament && (
-                    <div className={styles.errorDivTemp}>
-                      {" "}
-                      <p className={styles.error}>{errors.temperament}</p>
-                    </div>
-                  )} */}
+                {errors.genres && (
+                  <div className={styles.errorDivTemp}>
+                    {" "}
+                    <p className={styles.error}>{errors.genres}</p>
+                  </div>
+                )}
                 <div className={styles.container_Check3}>
                   <div className={styles.container_Check2}>
                     {genres

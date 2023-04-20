@@ -24,9 +24,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       background_image: {
-        type: DataTypes.STRING,
+        type: DataTypes.BLOB,
         allowNull: false,
-        defaultValue: "../PI-Videogames-main/videogame.png",
+        // defaultValue:
+        //   "https://pbs.twimg.com/profile_images/951372339199045632/-JTt60iX_400x400.jpg",
       },
       released: {
         type: DataTypes.DATEONLY,
