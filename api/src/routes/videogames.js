@@ -1,7 +1,5 @@
 const axios = require("axios");
 const { Router } = require("express");
-const multer = require("multer");
-const upload = multer();
 
 const getAllVideogames = require("../controllers/videogames/getVideogames");
 const addVideogame = require("../controllers/videogames/addVideogame");
@@ -20,7 +18,7 @@ router.get("/", async (req, res) => {
 
 router.get("/searched", async (req, res) => {
   const { game } = req.query;
-  console.log("gameSearched: ", game);
+  // console.log("gameSearched: ", game);
   try {
     const Videogames = await getAllVideogames();
     const resultado = [];
@@ -56,12 +54,8 @@ router.get("/:id", (req, res) => {
     .catch((e) => res.status(400).send({ error: e.message }));
 });
 
-router.post("/", upload.single("background_image"), async (req, res) => {
-  const fileData = req.file.buffer;
-  req.body.background_image = fileData;
-  req.body.genres = JSON.parse(req.body.genres);
-  req.body.platforms = JSON.parse(req.body.platforms);
-  console.log(req.body);
+router.post("/", async (req, res) => {
+  // console.log(req.body);
   try {
     const videogameAdded = await addVideogame(req.body);
     res.status(200).json(videogameAdded);

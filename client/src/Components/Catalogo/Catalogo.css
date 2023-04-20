@@ -17,7 +17,7 @@
 }
 
 .btnSort {
-  width: 131px;
+  /* width: 131px; */
   height: 34px;
   flex-grow: 0;
   margin: 6px 20px 2px;

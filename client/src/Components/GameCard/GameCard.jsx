@@ -18,9 +18,7 @@ const GameCard = ({ id, name, image, genres }) => {
                 </label>
               ))
             ) : (
-              <label className={styles.label}>
-                Doesn't have any genres
-              </label>
+              <label className={styles.label}>Doesn't have any genres</label>
             )}
           </div>
           {/* <div className={styles.card_w}>

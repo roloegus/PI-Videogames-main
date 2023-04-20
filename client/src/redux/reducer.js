@@ -19,7 +19,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
-  console.log("REDUCER payload: ", payload);
+  // console.log("REDUCER payload: ", payload);
 
   switch (type) {
     case "GET_ALL_GAMES":

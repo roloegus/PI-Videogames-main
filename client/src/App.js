@@ -3,11 +3,11 @@ import { Route } from "react-router-dom";
 import LandingPage from "./Components/LandingPage/LandingPage";
 import Catalogo from "./Components/Catalogo/Catalogo";
 import Game from "./Components/Game/Game";
-import Searched from "./Components/Game/searchedGame";
-import CreateGame from "./Components/Game/createGame";
+import Searched from "./Components/SearchedGame/SearchedGame";
+import CreateGame from "./Components/CreateGame/CreateGame";
 import Nav from "./Components/NavBar/Nav";
 // import CreateDog from "./componentes/CreateDog";
-import FilterGames from "./Components/filterGames/FilterGames";
+import FilterGames from "./Components/FilterGames/FilterGames";
 import NavCreate from "./Components/NavCreate/NavCreate";
 import "./App.css";
 

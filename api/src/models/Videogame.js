@@ -24,9 +24,9 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       background_image: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING,
         allowNull: false,
-        // defaultValue:
+        // Image:
         //   "https://pbs.twimg.com/profile_images/951372339199045632/-JTt60iX_400x400.jpg",
       },
       released: {

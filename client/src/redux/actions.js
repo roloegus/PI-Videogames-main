@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const url = "http://192.168.0.29:3001";
-const url = "http://localhost:3001";
+const url = "http://192.168.0.29:3001";
+// const url = "http://localhost:3001";
 
 export const getAllGames = () => (dispatch) => {
   // console.log("Entro");
@@ -61,7 +61,7 @@ export const receivePost = (payload) => {
   };
 };
 
-export const postGames = (gameSeleccionado, imageGame) => (dispatch) => {
+export const postGames = (gameSeleccionado) => (dispatch) => {
   // console.log("gameSeleccionado 111: ", gameSeleccionado);
 
   //Para los géneros
@@ -73,40 +73,31 @@ export const postGames = (gameSeleccionado, imageGame) => (dispatch) => {
   // console.log("genresObj AAA: ", genresObj);
   gameSeleccionado.genres = genresObj;
 
-  //Para los géneros
+  //Para las plataformas
   const plats = gameSeleccionado.platforms;
   const platsObj = plats.map((pla) => {
     console.log("pla: ", pla);
-    return { name: pla };
+    return {
+      platform: {
+        name: pla,
+      },
+    };
+    // return { name: pla };
   });
   // console.log("platsObj BBB: ", platsObj);
   gameSeleccionado.platforms = platsObj;
 
-  const formData = new FormData();
-  formData.append("name", gameSeleccionado.name);
-  formData.append("description", gameSeleccionado.description);
-  formData.append("rating", gameSeleccionado.rating);
-  formData.append("genres", JSON.stringify(gameSeleccionado.genres));
-  formData.append("platforms", JSON.stringify(gameSeleccionado.platforms));
-  formData.append("released", gameSeleccionado.released);
-  formData.append("background_image", imageGame, imageGame.name);
-
-  // console.log("gameSeleccionado 222: ", gameSeleccionado);
+  console.log("gameSeleccionado 222: ", gameSeleccionado);
   axios
-    .post(`${url}/videogames`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    .post(`${url}/videogames`, {
+      name: gameSeleccionado.name,
+      description: gameSeleccionado.description,
+      rating: gameSeleccionado.rating,
+      genres: gameSeleccionado.genres,
+      platforms: gameSeleccionado.platforms,
+      background_image: gameSeleccionado.background_image,
+      released: gameSeleccionado.released,
     })
-    // .post(`${url}/videogames`, {
-    //   name: gameSeleccionado.name,
-    //   description: gameSeleccionado.description,
-    //   rating: gameSeleccionado.rating,
-    //   genres: gameSeleccionado.genres,
-    //   platforms: gameSeleccionado.platforms,
-    //   background_image: gameSeleccionado.background_image,
-    //   released: gameSeleccionado.released,
-    // })
     .then((data) => {
       dispatch({
         type: "POST_GAMES",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./SearchedDogs.module.css";
+import styles from "./SearchedGame.module.css";
 import axios from "axios";
 import GameCard from "../GameCard/GameCard";
 import { useParams } from "react-router-dom";
