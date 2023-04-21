@@ -14,7 +14,7 @@ const Game = () => {
   const result = videoGames.filter((word) => word.id == id);
 
   useEffect(() => {
-    dispatch(getAllGames());
+    //dispatch(getAllGames());
     console.log("id: ", id);
     console.log("videoGames: ", videoGames);
 
@@ -22,21 +22,23 @@ const Game = () => {
     //   "{\"name\":\"PlayStation 5\"}"
     // ];
 
-    if (result[0].description) {
-      const convertedPlatforms = result[0].platforms.map((platform) => {
-        const platformObject = JSON.parse(platform);
-        platformObject.name = "PlayStation 5";
-        return {
-          platform: platformObject,
-        };
-      });
-      console.log("convertedPlatforms: ", convertedPlatforms);
-      result[0].platforms = convertedPlatforms;
-    }
+    if (result && result[0]) {
+      if (result[0].description) {
+        const convertedPlatforms = result[0].platforms.map((platform) => {
+          const platformObject = JSON.parse(platform);
+          platformObject.name = "PlayStation 5";
+          return {
+            platform: platformObject,
+          };
+        });
+        console.log("convertedPlatforms: ", convertedPlatforms);
+        result[0].platforms = convertedPlatforms;
+      }
 
-    console.log("result: ", result);
-    setData(result[0]);
-  }, [id]);
+      console.log("result: ", result);
+      setData(result[0]);
+    }
+  }, [id, videoGames]);
 
   useEffect(() => {
     dispatch(getAllGames());
@@ -49,9 +51,9 @@ const Game = () => {
   return (
     <div>
       {data ? (
-        <div className={styles.createDiv}>
-          <div className={styles.containerE}>
-            <div className={styles.divBreedE}>
+        <div className={styles.a}>
+          <div className={styles.a}>
+            <div className={styles.a}>
               <div className={styles.container_img}>
                 <img
                   src={data?.background_image}
@@ -60,7 +62,7 @@ const Game = () => {
                 />
               </div>
 
-              <div className={styles.container_data}>
+              <div className={styles.f}>
                 <p className={styles.temlabel}>
                   ID: <label className={styles.description}>{data.id}</label>
                 </p>
