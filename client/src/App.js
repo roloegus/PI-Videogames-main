@@ -19,17 +19,17 @@ function App() {
       <Route exact path="/home" render={() => <Nav onSearch="onSearch" />} />
       {/* <Route exact path="/home" component={FilterDogs} />
       <Route exact path="/home" component={Catalogo} /> */}
+      <Route exact path="/game/:id" component={NavCreate} />
+      <Route exact path="/game/:id" component={Game} />
+      <Route exact path="/createGame" component={NavCreate} />
+      <Route exact path="/createGame" component={CreateGame} />
+      <Route exact path="/searched/:game" component={Searched} />
       <div className="home">
         <div className="home">
           <Route exact path="/home" component={FilterGames} />
         </div>
         <Route exact path="/home" component={Catalogo} />
       </div>
-      <Route exact path="/game/:id" component={NavCreate} />
-      <Route exact path="/game/:id" component={Game} />
-      <Route exact path="/createGame" component={NavCreate} />
-      <Route exact path="/createGame" component={CreateGame} />
-      <Route exact path="/searched/:game" component={Searched} />
     </div>
   );
 }

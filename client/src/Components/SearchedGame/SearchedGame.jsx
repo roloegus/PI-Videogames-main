@@ -23,6 +23,7 @@ const SearchedGames = () => {
   // useEffect(() => {
   // }, [dispatch]);
   useEffect(() => {
+    // .get(`http://localhost:3001/videogames/searched?game=${game}`)
     const traeJuegos = axios
       .get(`http://192.168.0.29:3001/videogames/searched?game=${game}`)
       .then((response) => {
