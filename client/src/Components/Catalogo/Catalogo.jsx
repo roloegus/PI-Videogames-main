@@ -162,6 +162,7 @@ const Catalogo = () => {
 
   return (
     <div>
+      {window.scrollTo(0, 0)}
       <div className="btnDiv">
         {/* <img src={imgOr} alt="ima" /> */}
         <div className="btnDiv2">

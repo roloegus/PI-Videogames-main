@@ -25,7 +25,8 @@ const SearchedGames = () => {
   useEffect(() => {
     // .get(`http://localhost:3001/videogames/searched?game=${game}`)
     const traeJuegos = axios
-      .get(`http://192.168.0.29:3001/videogames/searched?game=${game}`)
+      .get(`http://localhost:3001/videogames/searched?game=${game}`)
+      // .get(`http://192.168.0.29:3001/videogames/searched?game=${game}`)
       .then((response) => {
         console.log("searchedGame response: ", response.data);
         setGameSearch(response.data);

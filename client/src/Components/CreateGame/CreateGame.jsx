@@ -225,22 +225,11 @@ const CreateVideogame = () => {
                         <p className={styles.error}>{errors.rating}</p>
                       </div>
                     )}
-                    {/* <p className={styles.max}>Max</p> */}
-                    {/* <input
-                    className={styles.form_input}
-                    type="text"
-                    name="height"
-                      value={hmax ? hmax : ""}
-                      onChange={(e) => {
-                        setHmax(e.target.value);
-                      }}
-                  /> */}
                   </div>
 
                   <br />
                   <p className={styles.form_item}>Released</p>
                   <div className={styles.divCamp}>
-                    {/* <p className={styles.min}>Min</p> */}
                     <input
                       className={styles.form_name}
                       type="date"
@@ -250,55 +239,9 @@ const CreateVideogame = () => {
                       }
                       onChange={handleChange}
                     />
-                    {/* {errors.weight && (
-                      <div className={styles.errorDiv}>
-                        {" "}
-                        <p className={styles.error}>{errors.weight}</p>{" "}
-                      </div>
-                    )} */}
-                    {/* <p className={styles.max}>Max</p>
-                  <input
-                    className={styles.form_input}
-                    type="text"
-                    name="weight"
-                      value={wmax ? wmax : ""}
-                      onChange={(e) => {
-                        setWmax(e.target.value);
-                      }}
-                  /> */}
                   </div>
 
                   <br />
-
-                  {/* <p className={styles.form_item}>Life Span</p> */}
-                  {/* <div className={styles.divCamp}> */}
-                  {/* <p className={styles.min}>Min</p>
-                  <input
-                    className={styles.form_input}
-                    type="text"
-                    name="life_span"
-                      value={smin ? smin : ""}
-                      onChange={(e) => {
-                        setSmin(e.target.value);
-                      }}
-                  /> */}
-                  {/* {errors.life_span && (
-                      <div className={styles.errorDiv}>
-                        {" "}
-                        <p className={styles.error}>{errors.life_span}</p>{" "}
-                      </div>
-                    )} */}
-                  {/* <p className={styles.max}>Max</p> */}
-                  {/* <input
-                    className={styles.form_input}
-                    type="text"
-                    name="life_span"
-                      value={smax ? smax : ""}
-                      onChange={(e) => {
-                        setSmax(e.target.value);
-                      }}
-                  /> */}
-                  {/* </div> */}
                 </div>
               </div>
               <div className={styles.divImg}>
@@ -307,9 +250,7 @@ const CreateVideogame = () => {
                 </div>
 
                 {/* {errors.image && <p className={styles.error}>{errors.image}</p>} */}
-                <div className={styles.img}>
-                  {/* <img src={DogsSeleccionado.image} alt="" /> */}
-                </div>
+                <div className={styles.img}></div>
                 <input
                   name="background_image"
                   type="file"
@@ -317,7 +258,7 @@ const CreateVideogame = () => {
                 />
                 <br />
                 <br></br>
-                {/* <img src={dogsImg} alt="" /> */}
+
                 <br />
               </div>
               <div className={styles.divTemp}>
@@ -356,12 +297,7 @@ const CreateVideogame = () => {
                   <div className={styles.TitleBreed}>
                     <p>Platforms</p>
                   </div>
-                  {/* {errors.temperament && (
-                    <div className={styles.errorDivTemp}>
-                      {" "}
-                      <p className={styles.error}>{errors.temperament}</p>
-                    </div>
-                  )} */}
+
                   <div className={styles.container_Check3}>
                     <div className={styles.container_Check2}>
                       {/* {genres
@@ -390,12 +326,12 @@ const CreateVideogame = () => {
                       <li className={styles.li} key={3}>
                         <input
                           type="checkbox"
-                          value="Play 5"
-                          checked={selectedPlatform.includes("Play 5")}
+                          value="PlayStation 5"
+                          checked={selectedPlatform.includes("PlayStation 5")}
                           onChange={handleOptionChangePlatform}
                           className={styles.check}
                         />
-                        Play 5
+                        PlayStation 5
                       </li>
                       <li className={styles.li} key={4}>
                         <input
@@ -437,8 +373,6 @@ const CreateVideogame = () => {
                         />
                         Xbox Series S/X
                       </li>
-                      {/* ))
-                      : ""} */}
                     </div>
                   </div>
                 </div>

@@ -18,15 +18,12 @@ const Game = () => {
     console.log("id: ", id);
     console.log("videoGames: ", videoGames);
 
-    // const platforms = [
-    //   "{\"name\":\"PlayStation 5\"}"
-    // ];
-
     if (result && result[0]) {
       if (result[0].description) {
         const convertedPlatforms = result[0].platforms.map((platform) => {
           const platformObject = JSON.parse(platform);
-          platformObject.name = "PlayStation 5";
+          // console.log("platformObject: ", platformObject);
+          platformObject.name = platformObject.platform.name;
           return {
             platform: platformObject,
           };
