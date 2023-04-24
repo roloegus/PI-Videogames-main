@@ -12,9 +12,6 @@ import {
 import Paginate from "../Paginate/Paginate";
 
 const Catalogo = () => {
-  // const [currentItems, setCurrentItems] = useState();
-  // const [pageCount, setPageCount] = useState(0);
-  // const [itemOffset, setItemOffset] = useState(0);
   const [data, setData] = useState();
   const [data2, setData2] = useState();
   const itemsPerPage = 15;
@@ -26,9 +23,6 @@ const Catalogo = () => {
     (state) => state.reducer.selectedOptions
   );
 
-  // console.log("FILTRADOGAMES: ", gamesFilter);
-  //const gamesFilter = useSelector((state) => state.reducerDogs.sortedDogs);
-  // const searchedDogs = useSelector((state) => state.reducerDogs.searchedDogs);
   const [currentPage, setCurrentPage] = useState(1);
   const [charactersPerPage, setCharactersPerPage] = useState(15);
   const [indexOfLastCharacter, setIndexOfLastCharacter] = useState(15);
@@ -121,7 +115,7 @@ const Catalogo = () => {
     });
     setCurrentGames(dataCopy);
   };
-  const sortWeightAsc = () => {
+  const sortRatingAsc = () => {
     // .reduce((a, b) => a + b, 0)
 
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
@@ -142,7 +136,7 @@ const Catalogo = () => {
     });
     setCurrentGames(dataCopy);
   };
-  const sortWeightDesc = () => {
+  const sortRatingDesc = () => {
     const dataCopy = [...currentGames];
 
     dataCopy.sort((b, a) => {
@@ -184,13 +178,13 @@ const Catalogo = () => {
           <input
             type="submit"
             className="btnSort"
-            onClick={sortWeightAsc}
+            onClick={sortRatingAsc}
             value="Rating Asc"
           />
           <input
             type="submit"
             className="btnSort"
-            onClick={sortWeightDesc}
+            onClick={sortRatingDesc}
             value="Rating Desc"
           />
         </div>

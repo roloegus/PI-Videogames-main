@@ -1,5 +1,3 @@
-// const getRevelantDataFromAPI = require('../../functions/getRevelantData.js');
-// const { getAllVideogames } = require("./getVideogames");
 const getAllVideogames = require("./getVideogames");
 //todo search by name
 const searchByName = async (req, res, name) => {
@@ -21,5 +19,3 @@ const searchByName = async (req, res, name) => {
 };
 
 module.exports = searchByName;
-
-const getRevelantDataFromAPI = require("../../functions/getRevelantData.js");

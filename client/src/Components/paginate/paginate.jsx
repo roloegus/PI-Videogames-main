@@ -1,5 +1,6 @@
 import React from "react";
 import "../Catalogo/Catalogo.css";
+import styles from "./Paginate.module.css";
 
 export default function Paginate({
   charactersPerPage,
@@ -14,11 +15,11 @@ export default function Paginate({
 
   return (
     <nav>
-      <div className="pagination">
+      <div className={styles.pagination}>
         {pageNumbers &&
           pageNumbers.map((number) => (
             <li key={number}>
-              <a className="page-num" onClick={() => paginate(number)}>
+              <a className={styles.number} onClick={() => paginate(number)}>
                 {number}
               </a>
             </li>

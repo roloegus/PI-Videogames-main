@@ -7,7 +7,7 @@
   list-style: none;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
   font-size: 12px;
   gap: 5px;
   font-family: 'Rubik';
@@ -35,3 +35,8 @@
  
 }
 
+.number:hover{
+  /* background: #124c5f; */
+  box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+  transition: all 0.2s ease;
+}

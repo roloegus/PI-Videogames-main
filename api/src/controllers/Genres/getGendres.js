@@ -11,17 +11,14 @@ const getGenres = async () => {
     const genAPI = await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`)
       .then((r) => r.data.results)
       .then((games) => {
-        
-      //   console.log(games);
-         let genres = games
-        .filter((game) => game.name !== undefined)
-      //     .map((dog) => dog.genres.split(", "))
-      //     .flat();
+        //   console.log(games);
+        let genres = games.filter((game) => game.name !== undefined);
+
         return [...new Set(genres)];
       });
 
     for (let name of genAPI) {
-      let newName = await Genre.create( name );
+      let newName = await Genre.create(name);
       res.push(newName.name);
     }
   } else {

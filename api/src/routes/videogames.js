@@ -33,18 +33,6 @@ router.get("/searched", async (req, res) => {
   } catch (error) {
     res.status(400).json(error.message);
   }
-
-  // try {
-  //   const Videogames = await getAllVideogames();
-
-  //   const searchByName = (games, name) => {
-  //     return games.filter((game) => game.name.includes(name));
-  //   };
-  //   const firstVideogames = searchByName(allVideogames, game);
-  //   res.status(200).json(firstVideogames);
-  // } catch (err) {
-  //   res.status(400).json({ error: err.message });
-  // }
 });
 
 router.get("/:id", (req, res) => {

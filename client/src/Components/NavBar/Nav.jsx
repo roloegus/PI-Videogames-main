@@ -1,5 +1,5 @@
 import React from "react";
-// import Logo from "../img/logo.png";
+// import Logo from "../../img/logo.png";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.css";

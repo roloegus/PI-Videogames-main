@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 5ch;
+  column-gap: 3ch;
   margin-left: 20%;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .btnSort {
-  /* width: 131px; */
+ 
   height: 34px;
   flex-grow: 0;
   margin: 6px 20px 2px;

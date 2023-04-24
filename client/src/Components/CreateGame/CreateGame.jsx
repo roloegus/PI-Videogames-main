@@ -98,6 +98,17 @@ const CreateVideogame = () => {
     if (gamesSeleccionado.platforms.length === 0) {
       formErrors.platforms = "Platform is required";
     }
+    if (gamesSeleccionado.released.length === 0) {
+      formErrors.released = "date released is required";
+    } else if (
+      gamesSeleccionado.released < "1900/01/01" ||
+      gamesSeleccionado.released > "2025/01/01"
+    ) {
+      formErrors.released = "Year must be between 1900 and 2025";
+    }
+    if (gamesSeleccionado.background_image.length === 0) {
+      formErrors.background_image = "Image is required";
+    }
 
     setErrors(formErrors);
     console.log(errors);
@@ -243,6 +254,12 @@ const CreateVideogame = () => {
                       }
                       onChange={handleChange}
                     />
+                    {errors.released && (
+                      <div className={styles.errorDivReleased}>
+                        {" "}
+                        <p className={styles.error}>{errors.released}</p>
+                      </div>
+                    )}
                   </div>
 
                   <br />
@@ -423,6 +440,12 @@ const CreateVideogame = () => {
                   type="file"
                   onChange={handleChange}
                 />
+                {errors.background_image && (
+                  <div className={styles.background_image}>
+                    {" "}
+                    <p className={styles.error}>{errors.background_image}</p>
+                  </div>
+                )}
                 <br />
                 <br></br>
 

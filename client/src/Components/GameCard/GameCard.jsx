@@ -9,7 +9,7 @@ const GameCard = ({ id, name, image, genres }) => {
         <img src={image} alt="Aqui va la imagen" className={styles.card_img} />
         <div className={styles.container_card}>
           <label className={styles.card_title}>{name}</label>
-          <div className={styles.temp}>
+          <div className={styles.gen}>
             {genres ? (
               genres.map((genre) => (
                 <label className={styles.label} key={genre.id}>

@@ -70,11 +70,6 @@ const Game = () => {
               <div className={styles.date}>
                 {data?.description ? (
                   <div>
-                    {/* <p className={styles.temlabel}>Descripción</p>
-                      <label className={styles.description}>
-                        {data.description}
-                      </label> */}
-
                     <p className={styles.temlabel}>
                       Description:{" "}
                       <label className={styles.description}>
@@ -93,7 +88,7 @@ const Game = () => {
                 )}
               </div>
               <p className={styles.temlabel}>Platforms</p>
-              <div className={styles.temp}>
+              <div className={styles.box}>
                 {data.platforms ? (
                   data.platforms.map((e) => (
                     <label className={styles.labelPlatform} key={e.id}>
@@ -120,7 +115,7 @@ const Game = () => {
                 <label className={styles.description}>{data.rating}</label>
               </p>
               <p className={styles.temlabel}>Genres</p>
-              <div className={styles.temp}>
+              <div className={styles.box}>
                 {data.genres ? (
                   data.genres.map((e) => (
                     <label className={styles.label} key={e.id}>

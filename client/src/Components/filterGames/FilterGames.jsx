@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import img from "../../img/packman.jpg";
+import img from "../../img/filterBy.svg";
 import styles from "./FilterGames.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getGenres, selectedOptionsRedux } from "../../redux/actions";
 import { filteredFromRedux } from "../../redux/actions";
 
 const FilterGames = () => {
-  // console.log(
-  //   "🚀 ~ file: Catalogo.jsx:20 ~ Catalogo ~ searchedDogs",
-  //   searchGame
-  // );
   const genres = useSelector((state) => state.reducer.genres);
 
   const dispatch = useDispatch();
@@ -45,7 +41,7 @@ const FilterGames = () => {
       <form onSubmit={handleSubmit}>
         <div className={styles.container_Check}>
           <div className={styles.imgCont}>
-            {/* <img src={img} alt="asd" /> */}
+            <img src={img} alt="asd" />
             <h1 className={styles.h1}>Filtrar por Género</h1>
           </div>
           <div className={styles.container_Check3}>

@@ -21,11 +21,7 @@ const getApiVideogames = async () => {
 };
 
 const getDbVideogames = async () => {
-  //getApiInfo
-  //   return [];
-
-  // server.get("/", (_req, res, next) => {
-  return await Videogame.findAll({ include: [Genre] }) //Busco todos los vehiculos
+  return await Videogame.findAll({ include: [Genre] }) //Busco todos los juegos
     .then((games) => {
       // console.log("games: ", games);
       return games;

@@ -41,31 +41,16 @@ const SearchBar = () => {
   // };
 
   return (
-    <form className="d-flex">
+    <form className={styles.d_flex}>
       <input
-        className="form-control me-2"
+        className={styles.searchBar}
         type="search"
-        placeholder="Búsqueda..."
+        placeholder="Search..."
         aria-label="Search"
         onChange={handleOptionChange}
       />
-      <button onClick={redirect} className="button-search">
-        Buscar
-      </button>
+      <button onClick={redirect} className={styles.button_search}></button>
     </form>
-    // <form onSubmit={handleSubmit} className={styles.d_flex}>
-    //   <input type="submit" className={styles.button_search} value=" " />
-    //   <input
-    //     className={styles.searchBar}
-    //     type="text"
-    //     placeholder="Search..."
-    //     aria-label="Search"
-    //     onChange={handleOptionChange}
-    //   />
-    //   <button onClick={redirect} className="button-search">
-    //     Buscar
-    //   </button>
-    // </form>
   );
 };
 

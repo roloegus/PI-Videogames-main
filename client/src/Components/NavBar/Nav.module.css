@@ -23,7 +23,7 @@
 .search_bar {
   display: flex;
   flex-direction: row;
-  margin-left: 1000px;
+  margin-left: 900px;
 }
 
 .divBtn {
@@ -41,6 +41,7 @@
 }
 
 .logo {
+  size: 10%;
   position: absolute;
   width: 149px;
   height: 44px;

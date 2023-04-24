@@ -104,7 +104,7 @@
   margin-left: 40px;
 }
 
-.platform {
+/* .platform {
   overflow: hidden;
   width: 978px;
   height: 538px;
@@ -117,7 +117,7 @@
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
   margin-top: 30px;
   margin-left: 40px;
-}
+} */
 
 .TitleBreedE {
   margin-top: -200px;
@@ -163,7 +163,7 @@
   text-align: left;
   color: #124c5f;
 }
-.divImg {
+/* .divImg {
   margin-top: 10px;
   width: 357.9px;
   height: 425px;
@@ -173,7 +173,7 @@
   background-color: #fff;
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
   margin-left: 10px;
-}
+} */
 
 .divCamp {
   display: flex;
@@ -207,7 +207,7 @@
   ); /* cambiar el color de fondo cuando está seleccionado */
 }
 
-.container_Check {
+/* .container_Check {
   margin-top: 10px;
   width: 357.9px;
   height: 425px;
@@ -217,7 +217,7 @@
   background-color: #fff;
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
   margin-left: 10px;
-}
+} */
 .container_Check2 {
   overflow-y: scroll;
   width: 230px;
@@ -267,35 +267,9 @@
   border-radius: 16px;
 }
 
-.min {
-  font-family: "Rubik";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-  color: #ffaa00;
-  padding-left: 10px;
-  padding-right: 10px;
-}
 
-.max {
-  font-family: "Rubik";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  display: flex;
-  align-items: center;
-  margin-left: 85px;
-  color: #ffaa00;
-  padding-left: 10px;
-  padding-right: 10px;
-}
 
-.form_input {
+/* .form_input {
   box-sizing: border-box;
   display: flex;
   color: black;
@@ -306,8 +280,8 @@
   border-radius: 16px;
   width: 60.03px;
   height: 36px;
-}
-.btnFilter {
+} */
+/* .btnFilter {
   width: 100.69px;
   height: 30.6px;
   left: 234px;
@@ -329,7 +303,7 @@
   color: rgba(255, 170, 0, 1) !important;
   box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
   transition: all 0.2s ease;
-}
+} */
 
 .container_Check2::-webkit-scrollbar {
   width: 15px;
@@ -386,6 +360,22 @@
   left: 40px;
 }
 .errorDivPlatforms {
+  margin-top: -10px;
+  display: flex;
+  position: absolute;
+  width: 200px;
+  height: 5px;
+  left: 40px;
+}
+.errorDivReleased {
+  margin-top: 10px;
+  display: flex;
+  position: absolute;
+  width: 200px;
+  height: 5px;
+  left: 40px;
+}
+.errorDivImage {
   margin-top: -10px;
   display: flex;
   position: absolute;

@@ -26,8 +26,6 @@ module.exports = (sequelize) => {
       background_image: {
         type: DataTypes.STRING,
         allowNull: false,
-        // Image:
-        //   "https://pbs.twimg.com/profile_images/951372339199045632/-JTt60iX_400x400.jpg",
       },
       released: {
         type: DataTypes.DATEONLY,
