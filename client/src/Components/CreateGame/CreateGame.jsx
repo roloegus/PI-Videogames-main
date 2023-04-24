@@ -95,6 +95,10 @@ const CreateVideogame = () => {
     if (gamesSeleccionado.genres.length === 0) {
       formErrors.genres = "Genres is required";
     }
+    if (gamesSeleccionado.platforms.length === 0) {
+      formErrors.platforms = "Platform is required";
+    }
+
     setErrors(formErrors);
     console.log(errors);
     if (Object.keys(formErrors).length === 0) {
@@ -244,30 +248,14 @@ const CreateVideogame = () => {
                   <br />
                 </div>
               </div>
-              <div className={styles.divImg}>
-                <div className={styles.TitleBreed}>
-                  <h3>Image</h3>
-                </div>
 
-                {/* {errors.image && <p className={styles.error}>{errors.image}</p>} */}
-                <div className={styles.img}></div>
-                <input
-                  name="background_image"
-                  type="file"
-                  onChange={handleChange}
-                />
-                <br />
-                <br></br>
-
-                <br />
-              </div>
               <div className={styles.divTemp}>
-                <div className={styles.container_Check}>
+                <div className={styles.divBreed}>
                   <div className={styles.TitleBreed}>
                     <p>Genres</p>
                   </div>
                   {errors.genres && (
-                    <div className={styles.errorDivTemp}>
+                    <div className={styles.errorDivGenres}>
                       {" "}
                       <p className={styles.error}>{errors.genres}</p>
                     </div>
@@ -293,11 +281,16 @@ const CreateVideogame = () => {
                 </div>
               </div>
               <div className={styles.divTemp}>
-                <div className={styles.container_Check}>
+                <div className={styles.divBreed}>
                   <div className={styles.TitleBreed}>
                     <p>Platforms</p>
                   </div>
-
+                  {errors.platforms && (
+                    <div className={styles.errorDivPlatforms}>
+                      {" "}
+                      <p className={styles.error}>{errors.platforms}</p>
+                    </div>
+                  )}
                   <div className={styles.container_Check3}>
                     <div className={styles.container_Check2}>
                       {/* {genres
@@ -373,9 +366,67 @@ const CreateVideogame = () => {
                         />
                         Xbox Series S/X
                       </li>
+                      <li className={styles.li} key={8}>
+                        <input
+                          type="checkbox"
+                          value="Linux"
+                          checked={selectedPlatform.includes("Linux")}
+                          onChange={handleOptionChangePlatform}
+                          className={styles.check}
+                        />
+                        Linux
+                      </li>
+                      <li className={styles.li} key={9}>
+                        <input
+                          type="checkbox"
+                          value="iOS"
+                          checked={selectedPlatform.includes("iOS")}
+                          onChange={handleOptionChangePlatform}
+                          className={styles.check}
+                        />
+                        iOS
+                      </li>
+                      <li className={styles.li} key={10}>
+                        <input
+                          type="checkbox"
+                          value="Android"
+                          checked={selectedPlatform.includes("Android")}
+                          onChange={handleOptionChangePlatform}
+                          className={styles.check}
+                        />
+                        Android
+                      </li>
+                      <li className={styles.li} key={11}>
+                        <input
+                          type="checkbox"
+                          value="macOS"
+                          checked={selectedPlatform.includes("macOS")}
+                          onChange={handleOptionChangePlatform}
+                          className={styles.check}
+                        />
+                        macOS
+                      </li>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className={styles.divBreed}>
+                <div className={styles.TitleBreed}>
+                  <h3>Image</h3>
+                </div>
+
+                {/* {errors.image && <p className={styles.error}>{errors.image}</p>} */}
+                <div className={styles.img}></div>
+                <input
+                  name="background_image"
+                  type="file"
+                  onChange={handleChange}
+                />
+                <br />
+                <br></br>
+
+                <br />
               </div>
 
               <div>

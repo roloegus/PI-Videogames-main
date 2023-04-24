@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./GameCard.module.css";
-// const GameCard = ({ id, name, temperament, height, weight, image }) => {
+
 const GameCard = ({ id, name, image, genres }) => {
   return (
-    // <div></div>
     <Link to={`/game/${id}`}>
       <div className={styles.card}>
         <img src={image} alt="Aqui va la imagen" className={styles.card_img} />
@@ -21,10 +20,6 @@ const GameCard = ({ id, name, image, genres }) => {
               <label className={styles.label}>Doesn't have any genres</label>
             )}
           </div>
-          {/* <div className={styles.card_w}>
-            <label className={styles.label2}>weight: {height} kg</label>
-            <label className={styles.label2}>height: {weight}</label>
-          </div> */}
         </div>
       </div>
     </Link>

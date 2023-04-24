@@ -6,14 +6,14 @@ const LandingPage = () => {
   return (
     <div
       className={styles.container}
-      // style={{
-      //   backgroundImage:
-      //     "url('https://c4.wallpaperflare.com/wallpaper/855/51/782/video-game-collage-wallpaper-preview.jpg')",
-      // }}
+      style={{
+        backgroundImage:
+          "url('https://cdn2.psychologytoday.com/assets/styles/manual_crop_1_91_1_1528x800/public/2019-12/shutterstock_278969585%20%281%29.jpg?itok=YNMkKVQ_')",
+      }}
     >
       <div className={styles.logo}>
         <img
-          src="https://www.soyhenry.com/_next/image?url=https%3A%2F%2Fassets.soyhenry.com%2Fhenry-landing%2Fassets%2FHenry%2Flogo.png&w=256&q=75"
+          src="https://camo.githubusercontent.com/35b81f213ddb0e019b3567f6982d740bb2d01ae5dd712a1537e09e826e940228/68747470733a2f2f643331757a386c77666d796e38672e636c6f756466726f6e742e6e65742f4173736574732f6c6f676f2d68656e72792d77686974652d6c672e706e67"
           alt="Henry logo"
         />
       </div>

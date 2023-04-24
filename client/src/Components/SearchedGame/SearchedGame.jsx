@@ -12,16 +12,7 @@ const SearchedGames = () => {
   const [gameSearch, setGameSearch] = useState();
 
   const dispatch = useDispatch();
-  // const dogs = useSelector((state) => state.reducerDogs.dogs);
-  // const filterDogs = dogs.filter((dog) =>
-  //   dog.name
-  //     .toLowerCase()
-  //     .split(" ")
-  //     .some((name) => name.startsWith(id))
-  // );
 
-  // useEffect(() => {
-  // }, [dispatch]);
   useEffect(() => {
     // .get(`http://localhost:3001/videogames/searched?game=${game}`)
     const traeJuegos = axios
