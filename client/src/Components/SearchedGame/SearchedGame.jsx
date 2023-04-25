@@ -14,21 +14,18 @@ const SearchedGames = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // .get(`http://localhost:3001/videogames/searched?game=${game}`)
-    const traeJuegos = axios
+    // .get(`http://192.168.0.10:3001/videogames/searched?game=${game}`)
+    axios
       .get(`http://localhost:3001/videogames/searched?game=${game}`)
-      // .get(`http://192.168.0.29:3001/videogames/searched?game=${game}`)
       .then((response) => {
         console.log("searchedGame response: ", response.data);
         setGameSearch(response.data);
+        setIsLoading(false);
         return response.data;
-      });
+      })
+      .catch(() => setIsLoading(false));
   }, []);
-  console.log("gameSearch: ", gameSearch);
-  // setTimeout(() => {
-  //   setIsLoading(false); // ocultar spinner
-  // }, 4000);
-  // return <h2>HOLAAAAAAAAAAA</h2>;
+
   if (gameSearch) {
     return (
       <div className={styles.container}>
@@ -46,11 +43,11 @@ const SearchedGames = () => {
   } else {
     return (
       <div className={styles.container2}>
-        {/* {isLoading ? (
+        {isLoading ? (
           <div className={styles.loader}></div>
-        ) : ( */}
-        <h1>Búsqueda no encontrada "{game}"</h1>
-        {/* )} */}
+        ) : (
+          <h1>Búsqueda no encontrada "{game}"</h1>
+        )}
       </div>
     );
   }

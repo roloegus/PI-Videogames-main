@@ -4,14 +4,14 @@ import { getAllGames, postGames, getGenres } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./CreateGame.module.css";
 import successImg from "../../img/success.svg";
+import platformArray from "../arrayplatform";
 
 const CreateVideogame = () => {
   const genres = useSelector((state) => state.reducer.genres);
   const videogames = useSelector((state) => state.reducer.games);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [selectedPlatform, setSelectedPlatform] = useState([]);
   const [imageGame, setImageGame] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [enableCreate, setEnableCreate] = useState(true);
   const [gamesSeleccionado, setGamesSeleccionado] = useState({
     name: "",
     description: "",
@@ -24,68 +24,18 @@ const CreateVideogame = () => {
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
-    var { name, value } = e.target;
-    // console.log("name: ", name);
-    // console.log("value: ", value);
-    if (name === "background_image") {
-      setImageGame(e.target.files[0]);
-    }
-    setGamesSeleccionado((prevState) => ({
-      ...prevState,
-      [name]: value,
-      genres: selectedOptions,
-      platforms: selectedPlatform,
-    }));
-  };
-
-  const handleOptionChange = (changeEvent) => {
-    setSelectedOptions(
-      selectedOptions.includes(changeEvent.target.value)
-        ? selectedOptions.filter((so) => so !== changeEvent.target.value)
-        : [...selectedOptions, changeEvent.target.value]
-    );
-    setGamesSeleccionado((prevState) => ({
-      ...prevState,
-      genres: selectedOptions,
-      platforms: selectedPlatform,
-    }));
-    // console.log("selectedOptions 11: ", selectedOptions);
-    // console.log("selectedPlatform 11: ", selectedPlatform);
-  };
-
-  const handleOptionChangePlatform = (changeEvent) => {
-    setSelectedPlatform(
-      selectedPlatform.includes(changeEvent.target.value)
-        ? selectedPlatform.filter((so) => so !== changeEvent.target.value)
-        : [...selectedPlatform, changeEvent.target.value]
-    );
-    setGamesSeleccionado((prevState) => ({
-      ...prevState,
-      genres: selectedOptions,
-      platforms: selectedPlatform,
-    }));
-    // console.log("selectedPlatform 11: ", selectedPlatform);
-  };
-
   const gameIsNotSame = videogames.filter(
     (e) => e.name === gamesSeleccionado.name
   );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // console.log(selectedOptions);
+  const dispatch = useDispatch();
 
-    // console.log("selectedPlatform: ", selectedPlatform);
-    // const pattern = /^[a-zA-Z\s]+$/;
-    let formErrors = {};
+  useEffect(() => {
+    const formErrors = {};
+
     if (gameIsNotSame.length !== 0) {
-      console.log("gameIsNotSame: ", gameIsNotSame);
       formErrors.name = "Name already exist";
     }
-    // if (!pattern.test(gamesSeleccionado.name)) {
-    //   formErrors.name = "Name should only have letters";
-    // }
     if (!gamesSeleccionado.name) {
       formErrors.name = "Name is required";
     }
@@ -110,20 +60,52 @@ const CreateVideogame = () => {
       formErrors.background_image = "Image is required";
     }
 
-    setErrors(formErrors);
-    console.log(errors);
     if (Object.keys(formErrors).length === 0) {
+      setEnableCreate(false);
+    } else {
+      setEnableCreate(true);
+    }
+
+    setErrors(formErrors);
+  }, [gamesSeleccionado]);
+
+  const handleChange = (e) => {
+    var { name, value } = e.target;
+    console.log("gamesSeleccionado: ", gamesSeleccionado);
+    if (name === "background_image") {
+      setImageGame(e.target.files[0]);
+    } else if (name === "genres") {
       setGamesSeleccionado((prevState) => ({
         ...prevState,
-        genres: selectedOptions,
-        platforms: selectedPlatform,
+        genres: prevState.genres.includes(value)
+          ? prevState.genres.filter((so) => so !== value)
+          : [...prevState.genres, value],
       }));
-      imageUpload();
-      console.log("game: ", gamesSeleccionado);
-      // dispatch(postGames(gamesSeleccionado));
-      dispatch(postGames(gamesSeleccionado, imageGame));
-      setSuccess(true);
+    } else if (name === "platforms") {
+      setGamesSeleccionado((prevState) => ({
+        ...prevState,
+        platforms: prevState.platforms.includes(value)
+          ? prevState.platforms.filter((so) => so !== value)
+          : [...prevState.platforms, value],
+      }));
+    } else {
+      setGamesSeleccionado((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setGamesSeleccionado((prevState) => ({
+      ...prevState,
+    }));
+    imageUpload();
+    console.log("game: ", gamesSeleccionado);
+    dispatch(postGames(gamesSeleccionado, imageGame));
+    setSuccess(true);
   };
 
   const imageUpload = () => {
@@ -139,7 +121,6 @@ const CreateVideogame = () => {
       }
     }
   };
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (imageGame && imageGame.name) {
@@ -279,24 +260,30 @@ const CreateVideogame = () => {
                   )}
                   <div className={styles.container_Check3}>
                     <div className={styles.container_Check2}>
-                      {genres
-                        ? genres.map((option) => (
-                            <li className={styles.li} key={option.id}>
-                              <input
-                                type="checkbox"
-                                value={option.name}
-                                checked={selectedOptions.includes(option.name)}
-                                onChange={handleOptionChange}
-                                className={styles.check}
-                              />
-                              {option.name}
-                            </li>
-                          ))
-                        : ""}
+                      <div className={styles.container_Check1}>
+                        {genres
+                          ? genres.map((option) => (
+                              <li className={styles.li} key={option.id}>
+                                <input
+                                  type="checkbox"
+                                  value={option.name}
+                                  name="genres"
+                                  checked={gamesSeleccionado.genres.includes(
+                                    option.name
+                                  )}
+                                  onChange={handleChange}
+                                  className={styles.check}
+                                />
+                                {option.name}
+                              </li>
+                            ))
+                          : ""}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div className={styles.divTemp}>
                 <div className={styles.divBreed}>
                   <div className={styles.TitleBreed}>
@@ -310,130 +297,33 @@ const CreateVideogame = () => {
                   )}
                   <div className={styles.container_Check3}>
                     <div className={styles.container_Check2}>
-                      {/* {genres
-                      ? genres.map((option) => ( */}
-
-                      <li className={styles.li} key={1}>
-                        <input
-                          type="checkbox"
-                          value="PlayStation 3"
-                          checked={selectedPlatform.includes("PlayStation 3")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        PlayStation 3
-                      </li>
-                      <li className={styles.li} key={2}>
-                        <input
-                          type="checkbox"
-                          value="PlayStation 4"
-                          checked={selectedPlatform.includes("PlayStation 4")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        PlayStation 4
-                      </li>
-                      <li className={styles.li} key={3}>
-                        <input
-                          type="checkbox"
-                          value="PlayStation 5"
-                          checked={selectedPlatform.includes("PlayStation 5")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        PlayStation 5
-                      </li>
-                      <li className={styles.li} key={4}>
-                        <input
-                          type="checkbox"
-                          value="PC"
-                          checked={selectedPlatform.includes("PC")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        PC
-                      </li>
-                      <li className={styles.li} key={5}>
-                        <input
-                          type="checkbox"
-                          value="Xbox One"
-                          checked={selectedPlatform.includes("Xbox One")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        Xbox One
-                      </li>
-                      <li className={styles.li} key={6}>
-                        <input
-                          type="checkbox"
-                          value="Xbox 360"
-                          checked={selectedPlatform.includes("Xbox 360")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        Xbox 360
-                      </li>
-                      <li className={styles.li} key={7}>
-                        <input
-                          type="checkbox"
-                          value="Xbox Series S/X"
-                          checked={selectedPlatform.includes("Xbox Series S/X")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        Xbox Series S/X
-                      </li>
-                      <li className={styles.li} key={8}>
-                        <input
-                          type="checkbox"
-                          value="Linux"
-                          checked={selectedPlatform.includes("Linux")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        Linux
-                      </li>
-                      <li className={styles.li} key={9}>
-                        <input
-                          type="checkbox"
-                          value="iOS"
-                          checked={selectedPlatform.includes("iOS")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        iOS
-                      </li>
-                      <li className={styles.li} key={10}>
-                        <input
-                          type="checkbox"
-                          value="Android"
-                          checked={selectedPlatform.includes("Android")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        Android
-                      </li>
-                      <li className={styles.li} key={11}>
-                        <input
-                          type="checkbox"
-                          value="macOS"
-                          checked={selectedPlatform.includes("macOS")}
-                          onChange={handleOptionChangePlatform}
-                          className={styles.check}
-                        />
-                        macOS
-                      </li>
+                      <div className={styles.container_Check1}>
+                        {platformArray
+                          ? platformArray.map((option, index) => (
+                              <li className={styles.li} key={index}>
+                                <input
+                                  type="checkbox"
+                                  value={option}
+                                  name="platforms"
+                                  checked={gamesSeleccionado.platforms.includes(
+                                    option
+                                  )}
+                                  onChange={handleChange}
+                                  className={styles.check}
+                                />
+                                {option}
+                              </li>
+                            ))
+                          : ""}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div className={styles.divBreed}>
                 <div className={styles.TitleBreed}>
                   <h3>Image</h3>
                 </div>
-
-                {/* {errors.image && <p className={styles.error}>{errors.image}</p>} */}
                 <div className={styles.img}></div>
                 <input
                   name="background_image"
@@ -452,9 +342,16 @@ const CreateVideogame = () => {
                 <br />
               </div>
 
-              <div>
-                <input className={styles.button} type="submit" value="Crear" />
-              </div>
+              {enableCreate ? null : (
+                <div>
+                  <input
+                    className={styles.button}
+                    disabled={enableCreate}
+                    type="submit"
+                    value="Crear"
+                  />
+                </div>
+              )}
             </div>
           </form>
         </div>

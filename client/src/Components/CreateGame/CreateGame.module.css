@@ -219,28 +219,36 @@
   margin-left: 10px;
 } */
 .container_Check2 {
-  overflow-y: scroll;
   width: 230px;
   height: 20px;
   flex-grow: 0;
   margin: 12px 0 0;
   padding: 2.1px 12.2px 316.7px 17.7px;
-
   background-color: #fff;
 }
+
 .container_Check3 {
+  /* overflow-y: scroll;
+  overflow-x: hidden; */
   width: 257.9px;
   height: 25px;
   flex-grow: 0;
   margin: 0px 0 0;
   padding: 11.1px 12.2px 316.7px 17.7px;
-
   background-color: #fff;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
+
+.container_Check1 {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 257.9px;
+  height: 330px;
+}
+
 .form_item {
   font-family: "Rubik";
   font-style: normal;

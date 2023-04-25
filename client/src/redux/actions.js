@@ -1,12 +1,10 @@
 import axios from "axios";
 
-// const url = "http://192.168.0.29:3001";
-const url = "http://localhost:3001";
+const url = "http://192.168.0.10:3001";
+// const url = "http://localhost:3001";
 
 export const getAllGames = () => (dispatch) => {
-  // console.log("Entro");
   axios.get(`${url}/videogames`).then((response) => {
-    // console.log("response: ", response.data);
     dispatch({
       type: "GET_ALL_GAMES",
       payload: response.data,
@@ -16,7 +14,6 @@ export const getAllGames = () => (dispatch) => {
 
 export const searchedGame = (payload) => {
   axios.get(`${url}/videogames/searched?game=`).then((response) => {
-    // console.log("searchedGame response: ", response.data);
     return response.data;
   });
 };
@@ -62,32 +59,27 @@ export const receivePost = (payload) => {
 };
 
 export const postGames = (gameSeleccionado) => (dispatch) => {
-  // console.log("gameSeleccionado 111: ", gameSeleccionado);
-
   //Para los géneros
   const genres = gameSeleccionado.genres;
   const genresObj = genres.map((genre) => {
-    console.log("genre: ", genre);
     return { name: genre };
   });
-  // console.log("genresObj AAA: ", genresObj);
   gameSeleccionado.genres = genresObj;
 
   //Para las plataformas
   const plats = gameSeleccionado.platforms;
   const platsObj = plats.map((pla) => {
-    console.log("pla: ", pla);
     return {
       platform: {
         name: pla,
       },
     };
-    // return { name: pla };
   });
-  // console.log("platsObj BBB: ", platsObj);
   gameSeleccionado.platforms = platsObj;
 
-  console.log("gameSeleccionado 222: ", gameSeleccionado);
+  if (gameSeleccionado.description === "") {
+    gameSeleccionado.description = "X";
+  }
   axios
     .post(`${url}/videogames`, {
       name: gameSeleccionado.name,
